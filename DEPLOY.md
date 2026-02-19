@@ -43,6 +43,10 @@ After creating your MySQL service in Railway:
 
 ## 6. Frontend Verification
 - **Static Files**: Confirm frontend HTML/CSS/JS files (like `food.html`) are committed to GitHub and **not excluded** in `.gitignore`. Otherwise, the homepage will 404.
+- **Images Not Loading?**: If your uploaded images are broken, your database column implies they are truncated. Run this SQL command in your database to fix it:
+    ```sql
+    ALTER TABLE recipes MODIFY image_url LONGTEXT;
+    ```
 
 ### Troubleshooting
 - **Database error** → Check environment variables.
