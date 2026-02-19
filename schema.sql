@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS recipes (
     title VARCHAR(255) NOT NULL,
     description TEXT,
     ingredients_text TEXT,
-    image_url VARCHAR(255),
+    image_url LONGTEXT,
     video_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
