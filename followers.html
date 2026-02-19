@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community & Followers - Food Munch</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link rel="stylesheet" href="food.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f9fbfe 0%, #ffffff 100%);
+            min-height: 100vh;
+            padding-top: 80px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .followers-header {
+            background: linear-gradient(135deg, #183b56 0%, #2d5a7a 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .followers-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(208, 178, 0, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .followers-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .followers-header p {
+            font-size: 18px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 0.5px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 18px;
+            border-radius: 25px;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+
+        .back-button:hover {
+            color: #d0b200;
+            background: rgba(208, 178, 0, 0.25);
+            border-color: #d0b200;
+            transform: translateX(-8px);
+            text-decoration: none;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border-top: 4px solid #d0b200;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(208, 178, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #d0b200;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #5a7184;
+            font-weight: 600;
+        }
+
+        .followers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .follower-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+        }
+
+        .follower-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(208, 178, 0, 0.3);
+            border-color: #d0b200;
+        }
+
+        .follower-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #d0b200 0%, #e6c700 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            overflow: hidden;
+        }
+
+        .follower-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .follower-content {
+            padding: 25px;
+        }
+
+        .follower-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #183b56;
+            margin-bottom: 8px;
+        }
+
+        .follower-handle {
+            font-size: 14px;
+            color: #7b8794;
+            margin-bottom: 15px;
+        }
+
+        .follower-bio {
+            font-size: 14px;
+            color: #5a7184;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+
+        .follower-stats {
+            display: flex;
+            justify-content: space-around;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 20px;
+        }
+
+        .follower-stat {
+            text-align: center;
+        }
+
+        .follower-stat-num {
+            font-size: 18px;
+            font-weight: 700;
+            color: #d0b200;
+        }
+
+        .follower-stat-label {
+            font-size: 12px;
+            color: #7b8794;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .follow-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #d0b200 0%, #e6c700 100%);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        .follow-btn:hover {
+            background: linear-gradient(135deg, #e6c700 0%, #f5d700 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(208, 178, 0, 0.35);
+        }
+
+        .follow-btn.following {
+            background: #e8ecf1;
+            color: #5a7184;
+        }
+
+        .follow-btn.following:hover {
+            background: #d8dce4;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #183b56;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #d0b200;
+            display: inline-block;
+        }
+
+        .tabs-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #e8ecf1;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #7b8794;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: #d0b200;
+            border-bottom-color: #d0b200;
+        }
+
+        .tab-btn:hover {
+            color: #183b56;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            .followers-header h1 {
+                font-size: 28px;
+            }
+
+            .followers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <a class="navbar-brand" href="profile.html"><img src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/food-munch-img.png" alt="Food Munch Logo" class="foodmunch-image navbar-profile-logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="food.html">Home</a>
+                <a class="nav-item nav-link" href="food.html#wcusection">why choose us?</a>
+                <a class="nav-item nav-link" href="food.html#exploresection">explore menu</a>
+                <a class="nav-item nav-link" href="food.html#deliverysection">delivery & payment</a>
+                <a class="nav-item nav-link" href="add-recipe.html">add recipe</a>
+                <a class="nav-item nav-link active" href="followers.html">follow us</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="followers-header">
+        <div class="container">
+            <a href="food.html" class="back-button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Home
+            </a>
+            <h1>🌟 Food Munch Community</h1>
+            <p>Join our growing community of food lovers and recipe creators</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Stats Section -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Total Followers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2.5K+</div>
+                <div class="stat-label">Active Creators</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15K+</div>
+                <div class="stat-label">Recipes Shared</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4.8★</div>
+                <div class="stat-label">Community Rating</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs-container">
+            <button class="tab-btn active" onclick="showTab('popular')">Popular Creators</button>
+            <button class="tab-btn" onclick="showTab('trending')">Trending Chefs</button>
+            <button class="tab-btn" onclick="showTab('new')">New Members</button>
+        </div>
+
+        <!-- Followers/Creators Grid -->
+        <div class="section-title">📍 Follow Food Creators</div>
+
+        <div class="followers-grid" id="followersContainer">
+            <!-- Cards will be generated here -->
+        </div>
+
+        <div style="margin-bottom: 80px; text-align: center;">
+            <h2 style="color: #183b56; font-weight: 700; margin-bottom: 20px;">Join Our Community</h2>
+            <p style="color: #5a7184; font-size: 16px; margin-bottom: 30px;">Start sharing your recipes and connect with millions of food enthusiasts worldwide!</p>
+            <button class="btn btn-lg" style="background: linear-gradient(135deg, #d0b200 0%, #e6c700 100%); color: white; border: none; padding: 15px 40px; border-radius: 25px; font-weight: 700; font-size: 16px; text-transform: uppercase; letter-spacing: 1px;">📸 Become a Creator</button>
+        </div>
+    </div>
+
+    <script>
+        const creators = [
+            {
+                name: "Chef Arun Kumar",
+                handle: "@chefArun",
+                bio: "Professional chef with 15 years of culinary experience. Specializing in authentic Indian cuisine.",
+                recipes: 234,
+                followers: 8500,
+                rating: "4.9",
+                emoji: "👨‍🍳"
+            },
+            {
+                name: "Priya Sharma",
+                handle: "@healthyWithPriya",
+                bio: "Nutrition expert sharing healthy, delicious recipes for modern living.",
+                recipes: 156,
+                followers: 6200,
+                rating: "4.8",
+                emoji: "👩‍⚕️"
+            },
+            {
+                name: "Rajesh Patel",
+                handle: "@rajeshKitchen",
+                bio: "Home chef exploring traditional recipes with a modern twist.",
+                recipes: 189,
+                followers: 5800,
+                rating: "4.7",
+                emoji: "👨‍🍳"
+            },
+            {
+                name: "Neha Gupta",
+                handle: "@nehasBakes",
+                bio: "Passionate baker creating stunning cakes and pastries every day.",
+                recipes: 245,
+                followers: 9200,
+                rating: "4.9",
+                emoji: "👩‍🍳"
+            },
+            {
+                name: "Vikram Singh",
+                handle: "@vikramCooking",
+                bio: "Street food enthusiast and innovative fusion cuisine creator.",
+                recipes: 178,
+                followers: 7100,
+                rating: "4.8",
+                emoji: "👨‍🍳"
+            },
+            {
+                name: "Ananya Verma",
+                handle: "@vegetarianDreams",
+                bio: "Creative vegetarian recipes that taste as good as they look.",
+                recipes: 203,
+                followers: 8900,
+                rating: "4.9",
+                emoji: "👩‍🍳"
+            },
+            {
+                name: "Arjun Desai",
+                handle: "@dessertLover",
+                bio: "Creating mouth-watering desserts and sweet treats.",
+                recipes: 167,
+                followers: 6500,
+                rating: "4.8",
+                emoji: "👨‍🍳"
+            },
+            {
+                name: "Zara Khan",
+                handle: "@zarasCuisine",
+                bio: "Cultural fusion cooking bringing flavors from around the world.",
+                recipes: 214,
+                followers: 7800,
+                rating: "4.9",
+                emoji: "👩‍🍳"
+            }
+        ];
+
+        function renderFollowers() {
+            const container = document.getElementById('followersContainer');
+            container.innerHTML = creators.map(creator => `
+                <div class="follower-card">
+                    <div class="follower-image">${creator.emoji}</div>
+                    <div class="follower-content">
+                        <div class="follower-name">${creator.name}</div>
+                        <div class="follower-handle">${creator.handle}</div>
+                        <div class="follower-bio">${creator.bio}</div>
+                        <div class="follower-stats">
+                            <div class="follower-stat">
+                                <div class="follower-stat-num">${creator.recipes}</div>
+                                <div class="follower-stat-label">Recipes</div>
+                            </div>
+                            <div class="follower-stat">
+                                <div class="follower-stat-num">${creator.followers.toLocaleString()}</div>
+                                <div class="follower-stat-label">Followers</div>
+                            </div>
+                            <div class="follower-stat">
+                                <div class="follower-stat-num">⭐ ${creator.rating}</div>
+                                <div class="follower-stat-label">Rating</div>
+                            </div>
+                        </div>
+                        <button class="follow-btn" onclick="toggleFollow(this)">Follow</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleFollow(button) {
+            if (button.classList.contains('following')) {
+                button.classList.remove('following');
+                button.textContent = 'Follow';
+            } else {
+                button.classList.add('following');
+                button.textContent = '✓ Following';
+            }
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            // In a real app, this would filter the creators list
+        }
+
+        // Load profile image
+        (function loadUserProfile() {
+            try {
+                const raw = localStorage.getItem('fm_user_profile');
+                if (!raw) return;
+                const profile = JSON.parse(raw);
+                if (profile && profile.photoDataUrl) {
+                    const imgs = document.querySelectorAll('.foodmunch-image, .navbar-profile-logo');
+                    imgs.forEach(img => { img.src = profile.photoDataUrl; img.alt = profile.name || 'User'; });
+                }
+            } catch (e) {
+                console.error('Error loading profile:', e);
+            }
+        })();
+
+        window.addEventListener('DOMContentLoaded', renderFollowers);
+    </script>
+</body>
+
+</html>

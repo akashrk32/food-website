@@ -1,0 +1,455 @@
+/* Add Recipe Page Styles */
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.add-recipe-container {
+    background: linear-gradient(135deg, #f9fbfe 0%, #f0f4f8 100%);
+    min-height: 100vh;
+    padding-top: 80px;
+    padding-bottom: 40px;
+}
+
+/* Recipe Header */
+.recipe-header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+.add-recipe-heading {
+    color: #183b56;
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: 36px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    letter-spacing: -0.5px;
+}
+
+.recipe-subtitle {
+    color: #5a7184;
+    font-size: 16px;
+    margin: 0;
+    font-weight: 300;
+}
+
+.recipe-form {
+    background: white;
+    padding: 45px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    animation: slideUpForm 0.6s ease-out;
+}
+
+/* Form Sections */
+.form-section {
+    margin-bottom: 40px;
+    padding-bottom: 35px;
+    border-bottom: 2px solid #f0f4f8;
+    position: relative;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.section-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #d0b200 0%, #f4c430 100%);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 20px;
+    margin-right: 18px;
+    box-shadow: 0 4px 15px rgba(208, 178, 0, 0.3);
+}
+
+.section-title {
+    color: #183b56;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+.form-label {
+    color: #183b56;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 10px;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.form-control {
+    border: 2px solid #e5eaf4;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #5a7184;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.3s ease;
+    background-color: #fafbfc;
+}
+
+.form-control:focus {
+    border-color: #d0b200;
+    box-shadow: 0 0 0 4px rgba(208, 178, 0, 0.1);
+    color: #183b56;
+    background-color: white;
+}
+
+.form-control::placeholder {
+    color: #9db1c1;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 140px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Form Hints */
+.form-hint {
+    color: #9db1c1;
+    font-size: 13px;
+    margin-top: 8px;
+    display: block;
+    font-weight: 400;
+}
+
+.optional {
+    color: #a0afc5;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+/* Custom File Upload */
+.custom-file-upload {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload .file-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: linear-gradient(135deg, #f9fbfe 0%, #f0f4f8 100%);
+    border: 2px dashed #d0b200;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 500;
+    color: #183b56;
+    transition: all 0.3s ease;
+    margin-bottom: 0;
+}
+
+.custom-file-upload .file-label:hover {
+    background: linear-gradient(135deg, #f0f4f8 0%, #e8f0f7 100%);
+    border-color: #b89a00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(208, 178, 0, 0.15);
+}
+
+.upload-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.custom-file-upload .file-label:hover .upload-icon {
+    transform: scale(1.1);
+}
+
+.upload-text {
+    font-weight: 600;
+    color: #183b56;
+    margin-bottom: 6px;
+}
+
+.upload-subtext {
+    font-size: 12px;
+    color: #9db1c1;
+    margin: 0;
+}
+
+.custom-file-upload input[type="file"]:focus + .file-label {
+    outline: 2px solid #d0b200;
+    outline-offset: 2px;
+}
+
+/* Image and Video Preview */
+.image-preview,
+.video-preview {
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(135deg, #fafbfc 0%, #f5f8fc 100%);
+    border-radius: 12px;
+    border: 1px solid #e5eaf4;
+}
+
+.preview-img {
+    max-width: 100%;
+    max-height: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    display: block;
+    margin: 0 auto;
+}
+
+.preview-video {
+    max-width: 100%;
+    max-height: 350px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    display: block;
+    margin: 0 auto;
+}
+
+/* Buttons */
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.btn-upload {
+    background: linear-gradient(135deg, #d0b200 0%, #e8c800 100%);
+    color: white;
+    padding: 14px 45px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(208, 178, 0, 0.3);
+}
+
+.btn-icon {
+    font-size: 18px;
+}
+
+.btn-upload:hover {
+    background: linear-gradient(135deg, #b89a00 0%, #d0b200 100%);
+    box-shadow: 0 6px 20px rgba(208, 178, 0, 0.4);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-upload:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(208, 178, 0, 0.3);
+}
+
+.btn-cancel {
+    background-color: #e5eaf4;
+    color: #183b56;
+    padding: 14px 45px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    display: inline-block;
+}
+
+.btn-cancel:hover {
+    background-color: #cdd6e0;
+    color: #183b56;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(24, 59, 86, 0.15);
+}
+
+.btn-cancel:active {
+    transform: translateY(0);
+}
+
+.btn-danger {
+    background-color: #ef5350 !important;
+    color: white !important;
+    font-weight: 600;
+    border: none;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #e53935 !important;
+    box-shadow: 0 4px 12px rgba(239, 83, 80, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUpForm {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form Group Spacing */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .add-recipe-container {
+        padding-top: 70px;
+        padding-bottom: 20px;
+    }
+
+    .recipe-form {
+        padding: 25px;
+        border-radius: 15px;
+    }
+
+    .add-recipe-heading {
+        font-size: 28px;
+    }
+
+    .recipe-subtitle {
+        font-size: 14px;
+    }
+
+    .section-header {
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .custom-file-upload .file-label {
+        padding: 30px 20px;
+    }
+
+    .upload-icon {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    .upload-text {
+        font-size: 14px;
+    }
+
+    .upload-subtext {
+        font-size: 11px;
+    }
+
+    .form-label {
+        font-size: 14px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .btn-upload,
+    .btn-cancel {
+        padding: 12px 30px;
+        font-size: 15px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .form-section {
+        padding-bottom: 25px;
+        margin-bottom: 25px;
+    }
+
+    .preview-img,
+    .preview-video {
+        max-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .recipe-form {
+        padding: 18px;
+    }
+
+    .add-recipe-heading {
+        font-size: 24px;
+        margin-top: 12px;
+    }
+
+    .section-number {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        margin-right: 15px;
+    }
+
+    .section-title {
+        font-size: 16px;
+    }
+
+    textarea.form-control {
+        min-height: 100px;
+    }
+
+    .form-control {
+        padding: 12px 14px;
+        font-size: 13px;
+    }
+
+    .btn-upload,
+    .btn-cancel {
+        padding: 11px 20px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Details - Food Munch</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link rel="stylesheet" href="food.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f9fbfe 0%, #ffffff 100%);
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .menu-details-header {
+            background: linear-gradient(135deg, #183b56 0%, #2d5a7a 100%);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 50px;
+            border-bottom: 6px solid #d0b200;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-details-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(208, 178, 0, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .menu-details-header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin: 15px 0 0 0;
+            font-family: "Roboto";
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-details-header p {
+            margin: 8px 0 0 0;
+            font-size: 16px;
+            opacity: 0.95;
+            font-family: "Roboto";
+            position: relative;
+            z-index: 2;
+            letter-spacing: 0.5px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: "Roboto";
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 18px;
+            border-radius: 25px;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+
+        .back-button:hover {
+            color: #d0b200;
+            background: rgba(208, 178, 0, 0.25);
+            border-color: #d0b200;
+            transform: translateX(-8px);
+            box-shadow: 0 4px 15px rgba(208, 178, 0, 0.3);
+        }
+
+        .back-button:active {
+            transform: translateX(-5px) scale(0.98);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .item-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .item-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(208, 178, 0, 0.05) 0%, transparent 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .item-card:hover {
+            transform: translateY(-18px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(208, 178, 0, 0.3);
+            border-color: #d0b200;
+        }
+
+        .item-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        .item-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .item-card:hover .item-image-wrapper img {
+            transform: scale(1.1) rotate(1deg);
+        }
+
+        .item-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #d0b200 0%, #e6c700 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 5;
+            box-shadow: 0 4px 12px rgba(208, 178, 0, 0.4);
+        }
+
+        .item-content {
+            padding: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .item-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #183b56;
+            margin: 0 0 10px 0;
+            font-family: "Roboto";
+            letter-spacing: 0.5px;
+        }
+
+        .item-description {
+            font-size: 14px;
+            color: #5a7184;
+            margin: 0 0 14px 0;
+            line-height: 1.6;
+            font-family: "Roboto";
+            min-height: 40px;
+        }
+
+        .item-price-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .item-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: #d0b200;
+            font-family: "Roboto";
+            display: flex;
+            align-items: baseline;
+            gap: 3px;
+        }
+
+        .item-price .currency {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .item-rating {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #f59e0b;
+            font-weight: 600;
+        }
+
+        .view-details-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #d0b200 0%, #e6c700 100%);
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(208, 178, 0, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: "Roboto";
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-details-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .view-details-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .view-details-btn:hover {
+            background: linear-gradient(135deg, #e6c700 0%, #f5d700 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(208, 178, 0, 0.5);
+        }
+
+        .view-details-btn:active {
+            transform: scale(0.98);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #7b8794;
+        }
+
+        .empty-state h2 {
+            color: #183b56;
+            margin-bottom: 15px;
+            font-family: "Roboto";
+        }
+
+        @media (max-width: 768px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .item-image-wrapper {
+                height: 240px;
+            }
+
+            .menu-details-header h1 {
+                font-size: 28px;
+            }
+
+            .back-button {
+                font-size: 14px;
+                padding: 8px 14px;
+            }
+
+            .item-title {
+                font-size: 18px;
+            }
+
+            .item-price {
+                font-size: 18px;
+            }
+
+            .view-details-btn {
+                font-size: 13px;
+                padding: 12px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <a class="navbar-brand" href="profile.html"><img src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/food-munch-img.png" alt="Food Munch Logo" class="foodmunch-image navbar-profile-logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="food.html">Home</a>
+                <a class="nav-item nav-link" href="food.html#wcusection">why choose us?</a>
+                <a class="nav-item nav-link" href="food.html#exploresection">explore menu</a>
+                <a class="nav-item nav-link" href="food.html#deliverysection">delivery & payment</a>
+                <a class="nav-item nav-link" href="add-recipe.html">add recipe</a>
+                <a class="nav-item nav-link" href="followers.html">follow us</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="menu-details-header">
+        <div class="container">
+            <a href="food.html#exploresection" class="back-button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Menu
+            </a>
+            <h1 id="categoryTitle">Menu Category</h1>
+            <p id="categoryDescription">Explore our delicious options</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Restaurant Menu Items + Community Recipes (mixed together) -->
+        <div class="details-grid" id="itemsContainer">
+            <!-- Items will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Menu data with images and descriptions
+        const menuData = {
+            "Non-Veg Starters": {
+                description: "Delicious non-vegetarian appetizers to start your meal",
+                items: [
+                    {
+                        name: "Paneer Tikka",
+                        image: "https://img.freepik.com/premium-photo/paneer-tikka-served-green-chutney-lemon-sliced-onions-selective-focus_466689-72615.jpg?w=1060",
+                        description: "Grilled cottage cheese cubes marinated in spices",
+                        price: "₹747",
+                        rating: "4.8"
+                    },
+                    {
+                        name: "Chicken Wings",
+                        image: "https://img.freepik.com/free-photo/front-view-fried-chicken-wings-plate-with-sauce-lemon_141793-3269.jpg?w=1060",
+                        description: "Spicy crispy chicken wings with aromatic spices",
+                        price: "₹830",
+                        rating: "4.7"
+                    },
+                    {
+                        name: "Seekh Kebab",
+                        image: "https://img.freepik.com/premium-photo/close-up-meat-seekh-kebab-served-with-green-chutney-lemon-onion_141793-7341.jpg?w=1060",
+                        description: "Ground meat kebab cooked on vertical rotisserie",
+                        price: "₹912",
+                        rating: "4.9"
+                    },
+                    {
+                        name: "Fish Fry",
+                        image: "https://img.freepik.com/premium-photo/fried-fish-fillet-golden-brown-color-served-with-lemon_141793-5789.jpg?w=1060",
+                        description: "Crispy fried fish with lemon and spices",
+                        price: "₹996",
+                        rating: "4.6"
+                    },
+                    {
+                        name: "Mutton Biryani",
+                        image: "https://img.freepik.com/premium-photo/mutton-biryani-served-plate-raita-salad_141793-7532.jpg?w=1060",
+                        description: "Aromatic basmati rice with tender mutton pieces",
+                        price: "₹1,078",
+                        rating: "4.9"
+                    }
+                ]
+            },
+            "Veg Starters": {
+                description: "Fresh and healthy vegetarian appetizers",
+                items: [
+                    {
+                        name: "Paneer Tikka",
+                        image: "https://img.freepik.com/premium-photo/paneer-tikka-served-green-chutney-lemon-sliced-onions-selective-focus_466689-72615.jpg?w=1060",
+                        description: "Chargrilled cottage cheese with spices",
+                        price: "₹663",
+                        rating: "4.8"
+                    },
+                    {
+                        name: "Vegetable Pakora",
+                        image: "https://img.freepik.com/free-photo/vegetable-pakora-served-green-chutney-white-background_141793-5642.jpg?w=1060",
+                        description: "Crispy battered vegetables fried to perfection",
+                        price: "₹580",
+                        rating: "4.7"
+                    },
+                    {
+                        name: "Crispy Potatoes",
+                        image: "https://img.freepik.com/free-photo/crispy-fried-potatoes-with-salt-pepper_141793-3478.jpg?w=1060",
+                        description: "Golden fried potatoes with aromatic spices",
+                        price: "₹497",
+                        rating: "4.6"
+                    },
+                    {
+                        name: "Corn Samosa",
+                        image: "https://img.freepik.com/premium-photo/crispy-samosas-filled-spiced-corn-served-chutney_141793-4891.jpg?w=1060",
+                        description: "Triangle pastries filled with corn and spices",
+                        price: "₹580",
+                        rating: "4.5"
+                    },
+                    {
+                        name: "Cheese Balls",
+                        image: "https://img.freepik.com/free-photo/cheese-balls-served-white-plate_141793-2903.jpg?w=1060",
+                        description: "Crispy cheese-filled fried balls",
+                        price: "₹663",
+                        rating: "4.8"
+                    }
+                ]
+            },
+            "Soups": {
+                description: "Warm and comforting soups to start your meal",
+                items: [
+                    {
+                        name: "Tomato Soup",
+                        image: "https://img.freepik.com/free-photo/tomato-soup-bread-wooden-table_141793-3238.jpg?w=1060",
+                        description: "Creamy tomato soup with fresh herbs",
+                        price: "₹414",
+                        rating: "4.7"
+                    },
+                    {
+                        name: "Hot & Sour Soup",
+                        image: "https://img.freepik.com/free-photo/hot-sour-soup-with-noodles_141793-3456.jpg?w=1060",
+                        description: "Tangy and spicy soup with vegetables",
+                        price: "₹497",
+                        rating: "4.8"
+                    },
+                    {
+                        name: "Corn Soup",
+                        image: "https://img.freepik.com/free-photo/corn-soup-in-bowl_141793-2876.jpg?w=1060",
+                        description: "Creamy corn soup with butter and spices",
+                        price: "₹456",
+                        rating: "4.6"
+                    },
+                    {
+                        name: "Mushroom Soup",
+                        image: "https://img.freepik.com/free-photo/mushroom-soup-with-bread_141793-3125.jpg?w=1060",
+                        description: "Earthy mushroom soup with cream",
+                        price: "₹497",
+                        rating: "4.7"
+                    },
+                    {
+                        name: "Lentil Soup",
+                        image: "https://img.freepik.com/free-photo/lentil-soup-served-bowl_141793-2965.jpg?w=1060",
+                        description: "Protein-rich lentil soup with vegetables",
+                        price: "₹414",
+                        rating: "4.6"
+                    }
+                ]
+            },
+            "Fish And Sea Food": {
+                description: "Fresh seafood prepared with authentic recipes",
+                items: [
+                    {
+                        name: "Grilled Fish",
+                        image: "https://img.freepik.com/premium-photo/grilled-fish-with-vegetables-lemon_141793-4562.jpg?w=1060",
+                        description: "Fresh fish grilled with lemon and herbs",
+                        price: "₹1,162",
+                        rating: "4.9"
+                    },
+                    {
+                        name: "Prawn Curry",
+                        image: "https://img.freepik.com/premium-photo/prawn-curry-served-rice_141793-5876.jpg?w=1060",
+                        description: "Spicy prawn curry in creamy coconut sauce",
+                        price: "₹1,245",
+                        rating: "4.8"
+                    },
+                    {
+                        name: "Fish Fry",
+                        image: "https://img.freepik.com/premium-photo/fried-fish-fillet-golden-brown-color-served-with-lemon_141793-5789.jpg?w=1060",
+                        description: "Crispy fried fish with aromatic spices",
+                        price: "₹1,078",
+                        rating: "4.7"
+                    },
+                    {
+                        name: "Crab Biryani",
+                        image: "https://img.freepik.com/premium-photo/crab-biryani-served-plate_141793-6543.jpg?w=1060",
+                        description: "Biryani with fresh crab meat and spices",
+                        price: "₹1,327",
+                        rating: "4.9"
+                    },
+                    {
+                        name: "Seafood Platter",
+                        image: "https://img.freepik.com/premium-photo/seafood-platter-with-grilled-fish-prawns-shells_141793-7234.jpg?w=1060",
+                        description: "Mix of grilled fish, prawns, and squid",
+                        price: "₹1,577",
+                        rating: "4.9"
+                    }
+                ]
+            },
+            "Main Course": {
+                description: "Hearty and satisfying main course dishes",
+                items: [
+                    {
+                        name: "Chicken Biryani",
+                        image: "https://img.freepik.com/premium-photo/chicken-biryani-served-plate-with-raita-curries_141793-6234.jpg?w=1060",
+                        description: "Aromatic basmati rice with tender chicken",
+                        price: "₹912",
+                        rating: "4.9"
+                    },
+                    {
+                        name: "Mutton Curry",
+                        image: "https://img.freepik.com/premium-photo/mutton-curry-served-with-roti_141793-5432.jpg?w=1060",
+                        description: "Tender mutton in rich spiced gravy",
+                        price: "₹1,078",
+                        rating: "4.8"
+                    },
+                    {
+                        name: "Butter Chicken",
+                        image: "https://img.freepik.com/premium-photo/butter-chicken-served-with-naan_141793-4876.jpg?w=1060",
+                        description: "Creamy tomato-based chicken curry",
+                        price: "₹912",
+                        rating: "4.9"
+                    },
+                    {
+                        name: "Paneer Butter Masala",
+                        image: "https://img.freepik.com/free-photo/paneer-butter-masala-served-white-plate_141793-3876.jpg?w=1060",
+                        description: "Cottage cheese in creamy tomato gravy",
+                        price: "₹830",
+                        rating: "4.8"
+                    },
+                    {
+                        name: "Lamb Rogan Josh",
+                        image: "https://img.freepik.com/premium-photo/lamb-rogan-josh-served-with-rice_141793-6765.jpg?w=1060",
+                        description: "Tender lamb cooked with aromatic spices",
+                        price: "₹1,162",
+                        rating: "4.9"
+                    }
+                ]
+            },
+            "Noodles": {
+                description: "Asian noodle dishes prepared fresh daily",
+                items: [
+                    {
+                        name: "Hakka Noodles",
+                        image: "https://img.freepik.com/free-photo/hakka-noodles-served-wooden-plate_141793-3567.jpg?w=1060",
+                        description: "Stir-fried noodles with vegetables",
+                        price: "₹663",
+                        rating: "4.7"
+                    },
+                    {
+                        name: "Chow Mein",
+                        image: "https://img.freepik.com/free-photo/chow-mein-noodles-with-vegetables_141793-4234.jpg?w=1060",
+                        description: "Crispy fried noodles with sauce",
+                        price: "₹747",
+                        rating: "4.8"
+                    },
+                    {
+                        name: "Singapore Noodles",
+                        image: "https://img.freepik.com/premium-photo/singapore-noodles-served-on-plate_141793-5678.jpg?w=1060",
+                        description: "Spicy curry flavored noodles",
+                        price: "₹747",
+                        rating: "4.7"
+                    },
+                    {
+                        name: "Ramen",
+                        image: "https://img.freepik.com/free-photo/ramen-noodles-with-egg-vegetables_141793-3456.jpg?w=1060",
+                        description: "Japanese ramen with broth and toppings",
+                        price: "₹830",
+                        rating: "4.8"
+                    },
+                    {
+                        name: "Egg Noodles",
+                        image: "https://img.freepik.com/free-photo/egg-noodles-with-sauce_141793-2876.jpg?w=1060",
+                        description: "Egg-based noodles with seasoning",
+                        price: "₹663",
+                        rating: "4.6"
+                    }
+                ]
+            },
+            "Salads": {
+                description: "Fresh and healthy salads with nutritious ingredients",
+                items: [
+                    {
+                        name: "Caesar Salad",
+                        image: "https://img.freepik.com/free-photo/caesar-salad-with-parmesan_141793-2345.jpg?w=1060",
+                        description: "Romaine lettuce with parmesan and croutons",
+                        price: "₹747",
+                        rating: "4.7"
+                    },
+                    {
+                        name: "Greek Salad",
+                        image: "https://img.freepik.com/free-photo/greek-salad-with-feta-cheese_141793-3456.jpg?w=1060",
+                        description: "Tomato, cucumber, feta and olives",
+                        price: "₹747",
+                        rating: "4.8"
+                    },
+                    {
+                        name: "Garden Fresh Salad",
+                        image: "https://img.freepik.com/free-photo/colorful-garden-salad-bowl_141793-4567.jpg?w=1060",
+                        description: "Mixed vegetables with fresh greens",
+                        price: "₹663",
+                        rating: "4.6"
+                    },
+                    {
+                        name: "Beetroot Salad",
+                        image: "https://img.freepik.com/premium-photo/beetroot-salad-with-goat-cheese_141793-5678.jpg?w=1060",
+                        description: "Sweet beetroot with greens",
+                        price: "₹747",
+                        rating: "4.7"
+                    },
+                    {
+                        name: "Quinoa Salad",
+                        image: "https://img.freepik.com/premium-photo/quinoa-salad-with-vegetables_141793-6789.jpg?w=1060",
+                        description: "Protein-rich quinoa with fresh veggies",
+                        price: "₹830",
+                        rating: "4.8"
+                    }
+                ]
+            },
+            "Desserts": {
+                description: "Sweet treats to end your meal perfectly",
+                items: [
+                    {
+                        name: "Chocolate Cake",
+                        image: "https://img.freepik.com/free-photo/chocolate-cake-slice-plate_141793-2456.jpg?w=1060",
+                        description: "Rich chocolate cake with frosting",
+                        price: "₹580",
+                        rating: "4.9"
+                    },
+                    {
+                        name: "Gulab Jamun",
+                        image: "https://img.freepik.com/premium-photo/gulab-jamun-served-plate-with-syrup_141793-4567.jpg?w=1060",
+                        description: "Soft milk solids in light sugar syrup",
+                        price: "₹497",
+                        rating: "4.8"
+                    },
+                    {
+                        name: "Ice Cream Sundae",
+                        image: "https://img.freepik.com/free-photo/ice-cream-sundae-with-chocolate_141793-3456.jpg?w=1060",
+                        description: "Vanilla ice cream with toppings",
+                        price: "₹580",
+                        rating: "4.7"
+                    },
+                    {
+                        name: "Fruit Cheesecake",
+                        image: "https://img.freepik.com/premium-photo/cheesecake-with-fresh-berries_141793-5678.jpg?w=1060",
+                        description: "Creamy cheesecake with fresh fruits",
+                        price: "₹663",
+                        rating: "4.8"
+                    },
+                    {
+                        name: "Brownie Delight",
+                        image: "https://img.freepik.com/free-photo/brownie-with-ice-cream_141793-2987.jpg?w=1060",
+                        description: "Fudgy brownie with ice cream",
+                        price: "₹580",
+                        rating: "4.9"
+                    }
+                ]
+            }
+        };
+
+        async function loadMenuDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const category = params.get('category');
+
+            if (!category || !menuData[category]) {
+                document.getElementById('itemsContainer').innerHTML = '<div class="empty-state"><h2>Category Not Found</h2><p>Please select a valid category from the menu.</p></div>';
+                return;
+            }
+
+            document.getElementById('categoryTitle').textContent = category;
+            document.getElementById('categoryDescription').textContent = menuData[category].description;
+
+            // Load restaurant menu items
+            const itemsHTML = menuData[category].items.map(item => `
+                <div class="item-card">
+                    <div class="item-image-wrapper">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="item-badge">⭐ ${item.rating}</div>
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-title">${item.name}</h3>
+                        <p class="item-description">${item.description}</p>
+                        <div class="item-price-section">
+                            <span class="item-price">${item.price}</span>
+                            <span class="item-rating">★ ${item.rating}/5</span>
+                        </div>
+                        <a href="item-details.html?item=${encodeURIComponent(item.name)}&category=${encodeURIComponent(category)}" class="view-details-btn" style="text-decoration: none; color: white; display: flex; align-items: center; justify-content: center;">View Details</a>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('itemsContainer').innerHTML = itemsHTML;
+
+            // Load community recipes from database and mix with menu items
+            try {
+                const response = await fetch(`http://127.0.0.1:5000/categories/${encodeURIComponent(category)}/recipes`);
+                const recipes = await response.json();
+                
+                // Add community recipes to the same grid as menu items
+                if (recipes.length > 0) {
+                    const recipesHTML = recipes.map(recipe => {
+                        // Handle base64 images or regular URLs
+                        let imageSrc = 'https://via.placeholder.com/400x250?text=No+Image';
+                        if (recipe.image_url) {
+                            if (recipe.image_url.startsWith('data:image')) {
+                                // Base64 image
+                                imageSrc = recipe.image_url;
+                            } else if (recipe.image_url.startsWith('http')) {
+                                // Regular URL
+                                imageSrc = recipe.image_url;
+                            } else {
+                                // Try as base64
+                                imageSrc = recipe.image_url;
+                            }
+                        }
+                        
+                        return `
+                            <div class="item-card">
+                                <div class="item-image-wrapper">
+                                    <img src="${imageSrc}" alt="${recipe.title}" onerror="this.src='https://via.placeholder.com/400x250?text=No+Image'">
+                                </div>
+                                <div class="item-content">
+                                    <h3 class="item-title">${recipe.title}</h3>
+                                    <p class="item-description">${recipe.description.substring(0, 80)}${recipe.description.length > 80 ? '...' : ''}</p>
+                                    <div class="item-price-section">
+                                        <span style="font-size: 14px; color: #7b8794;">👤 ${recipe.user_name || 'Unknown'}</span>
+                                    </div>
+                                    <a href="item-details.html?item=${encodeURIComponent(recipe.title)}&category=${encodeURIComponent(category)}" class="view-details-btn" style="text-decoration: none; color: white; display: flex; align-items: center; justify-content: center;">View Recipe</a>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                    document.getElementById('itemsContainer').innerHTML += recipesHTML;
+                }
+            } catch (error) {
+                console.error('Error loading community recipes:', error);
+            }
+        }
+
+
+        function addToCart(name, price) {
+            alert(`Added "${name}" (${price}) to cart!`);
+            // You can implement actual cart functionality here
+        }
+
+        // Load profile image
+        (function loadUserProfile() {
+            try {
+                const raw = localStorage.getItem('fm_user_profile');
+                if (!raw) return;
+                const profile = JSON.parse(raw);
+                if (profile && profile.photoDataUrl) {
+                    const imgs = document.querySelectorAll('.foodmunch-image, .navbar-profile-logo');
+                    imgs.forEach(img => { img.src = profile.photoDataUrl; img.alt = profile.name || 'User'; });
+                }
+            } catch (e) {
+                console.error('Error loading profile:', e);
+            }
+        })();
+
+        window.addEventListener('storage', function (ev) {
+            if (ev.key === 'fm_user_profile' || ev.key === 'fm_storage_update') {
+                try {
+                    const p = JSON.parse(ev.newValue || '{}');
+                    if (p && p.photoDataUrl) document.querySelectorAll('.foodmunch-image, .navbar-profile-logo').forEach(i => i.src = p.photoDataUrl);
+                } catch (e) { }
+            }
+        });
+
+        // Load menu details when page loads
+        window.addEventListener('DOMContentLoaded', loadMenuDetails);
+    </script>
+</body>
+
+</html>

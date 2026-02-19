@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details - Food Munch</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link rel="stylesheet" href="food.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f9fbfe 0%, #ffffff 100%);
+            min-height: 100vh;
+            padding-top: 80px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .item-details-header {
+            background: linear-gradient(135deg, #183b56 0%, #2d5a7a 100%);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 50px;
+            border-bottom: 6px solid #d0b200;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item-details-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(208, 178, 0, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 18px;
+            border-radius: 25px;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+
+        .back-button:hover {
+            color: #d0b200;
+            background: rgba(208, 178, 0, 0.25);
+            border-color: #d0b200;
+            transform: translateX(-8px);
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(208, 178, 0, 0.3);
+        }
+
+        .item-details-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .item-image-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(208, 178, 0, 0.3);
+            position: relative;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .main-image:hover img {
+            transform: scale(1.08) rotate(2deg);
+        }
+
+        .rating-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #d0b200 0%, #e6c700 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 6px 20px rgba(208, 178, 0, 0.4);
+            z-index: 5;
+        }
+
+        .price-tag {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #d0b200 0%, #e6c700 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 24px;
+            box-shadow: 0 6px 20px rgba(208, 178, 0, 0.4);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+        }
+
+        .item-info-section h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #183b56;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .item-description {
+            font-size: 16px;
+            color: #5a7184;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #f9fbfe 0%, #ffffff 100%);
+            padding: 25px;
+            border-radius: 18px;
+            border: 2px solid #e8ecf1;
+        }
+
+        .nutrition-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid #d0b200;
+            transition: all 0.3s ease;
+        }
+
+        .nutrition-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(208, 178, 0, 0.2);
+        }
+
+        .nutrition-label {
+            font-size: 12px;
+            color: #7b8794;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .nutrition-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: #d0b200;
+            margin-bottom: 5px;
+        }
+
+        .nutrition-unit {
+            font-size: 13px;
+            color: #5a7184;
+            font-weight: 600;
+        }
+
+        .ingredients-section,
+        .health-tips-section,
+        .reviews-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #183b56;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #d0b200;
+            display: inline-block;
+        }
+
+        .ingredients-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .ingredient-item {
+            background: linear-gradient(135deg, rgba(208, 178, 0, 0.1) 0%, rgba(230, 199, 0, 0.05) 100%);
+            padding: 16px 20px;
+            border-radius: 12px;
+            border-left: 4px solid #d0b200;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            color: #183b56;
+            font-weight: 500;
+        }
+
+        .ingredient-item:hover {
+            background: linear-gradient(135deg, rgba(208, 178, 0, 0.2) 0%, rgba(230, 199, 0, 0.1) 100%);
+            transform: translateX(8px);
+        }
+
+        .ingredient-icon {
+            font-size: 20px;
+            min-width: 25px;
+        }
+
+        .health-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .health-tip-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #d0b200;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .health-tip-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(208, 178, 0, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .health-tip-card:hover::before {
+            left: 100%;
+        }
+
+        .health-tip-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(208, 178, 0, 0.25);
+        }
+
+        .health-tip-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .health-tip-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #183b56;
+            margin-bottom: 10px;
+        }
+
+        .health-tip-content {
+            font-size: 14px;
+            color: #5a7184;
+            line-height: 1.6;
+        }
+
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid #e8ecf1;
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            border-color: #d0b200;
+            box-shadow: 0 12px 30px rgba(208, 178, 0, 0.2);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .review-user {
+            font-size: 16px;
+            font-weight: 700;
+            color: #183b56;
+        }
+
+        .review-rating {
+            color: #f59e0b;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .review-text {
+            font-size: 14px;
+            color: #5a7184;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #7b8794;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #d0b200 0%, #e6c700 100%);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(208, 178, 0, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .add-to-cart-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .add-to-cart-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .add-to-cart-btn:hover {
+            background: linear-gradient(135deg, #e6c700 0%, #f5d700 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(208, 178, 0, 0.5);
+        }
+
+        .add-to-cart-btn:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            .item-details-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .main-image {
+                height: 350px;
+            }
+
+            .item-info-section h1 {
+                font-size: 28px;
+            }
+
+            .nutrition-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .ingredients-list {
+                grid-template-columns: 1fr;
+            }
+
+            .health-tips {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <a class="navbar-brand" href="profile.html"><img src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/food-munch-img.png" alt="Food Munch Logo" class="foodmunch-image navbar-profile-logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="food.html">Home</a>
+                <a class="nav-item nav-link" href="food.html#wcusection">why choose us?</a>
+                <a class="nav-item nav-link" href="food.html#exploresection">explore menu</a>
+                <a class="nav-item nav-link" href="food.html#deliverysection">delivery & payment</a>
+                <a class="nav-item nav-link" href="add-recipe.html">add recipe</a>
+                <a class="nav-item nav-link" href="followers.html">follow us</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="item-details-header">
+        <div class="container">
+            <a href="menu-details.html?category=Back" class="back-button" id="backBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Menu
+            </a>
+            <h1 id="itemTitle">Item Name</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="item-details-container">
+            <!-- Image Section -->
+            <div class="item-image-section">
+                <div class="main-image">
+                    <img id="itemImage" src="https://img.freepik.com/premium-photo/paneer-tikka-served-green-chutney-lemon-sliced-onions-selective-focus_466689-72615.jpg?w=1060" alt="Item">
+                    <div class="rating-badge" id="ratingBadge">★ 4.8</div>
+                    <div class="price-tag" id="itemPrice">₹747</div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="item-info-section">
+                <h1 id="itemNameDetail">Paneer Tikka</h1>
+                <p class="item-description" id="itemDescriptionDetail">Tender pieces of paneer marinated in yogurt and spices, char-grilled to perfection. A classic North Indian appetizer that's healthy, protein-rich, and bursting with authentic flavors.</p>
+
+                <!-- Nutrition Facts -->
+                <div class="nutrition-grid">
+                    <div class="nutrition-item">
+                        <div class="nutrition-label">🔥 Calories</div>
+                        <div class="nutrition-value" id="caloriesValue">180</div>
+                        <div class="nutrition-unit">per serving</div>
+                    </div>
+                    <div class="nutrition-item">
+                        <div class="nutrition-label">💪 Protein</div>
+                        <div class="nutrition-value" id="proteinValue">22g</div>
+                        <div class="nutrition-unit">per serving</div>
+                    </div>
+                    <div class="nutrition-item">
+                        <div class="nutrition-label">🥗 Carbs</div>
+                        <div class="nutrition-value" id="carbsValue">5g</div>
+                        <div class="nutrition-unit">per serving</div>
+                    </div>
+                    <div class="nutrition-item">
+                        <div class="nutrition-label">🧈 Fat</div>
+                        <div class="nutrition-value" id="fatValue">8g</div>
+                        <div class="nutrition-unit">per serving</div>
+                    </div>
+                    <div class="nutrition-item">
+                        <div class="nutrition-label">🌾 Fiber</div>
+                        <div class="nutrition-value" id="fiberValue">2g</div>
+                        <div class="nutrition-unit">per serving</div>
+                    </div>
+                    <div class="nutrition-item">
+                        <div class="nutrition-label">🧂 Sodium</div>
+                        <div class="nutrition-value" id="sodiumValue">450mg</div>
+                        <div class="nutrition-unit">per serving</div>
+                    </div>
+                </div>
+
+                <button class="add-to-cart-btn" onclick="addToCart()">🛒 Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Ingredients Section -->
+        <div class="ingredients-section">
+            <h2 class="section-title">📋 Ingredients</h2>
+            <div class="ingredients-list" id="ingredientsList">
+                <div class="ingredient-item"><span class="ingredient-icon">🧀</span> Paneer Cheese</div>
+                <div class="ingredient-item"><span class="ingredient-icon">🥛</span> Yogurt</div>
+                <div class="ingredient-item"><span class="ingredient-icon">🌶️</span> Red Chili Powder</div>
+                <div class="ingredient-item"><span class="ingredient-icon">🧅</span> Onions</div>
+                <div class="ingredient-item"><span class="ingredient-icon">🍋</span> Lemon Juice</div>
+                <div class="ingredient-item"><span class="ingredient-icon">🧄</span> Garlic & Ginger</div>
+            </div>
+        </div>
+
+        <!-- Health Tips Section -->
+        <div class="health-tips-section">
+            <h2 class="section-title">✨ Health & Wellness Tips</h2>
+            <div class="health-tips">
+                <div class="health-tip-card">
+                    <div class="health-tip-icon">💪</div>
+                    <div class="health-tip-title">High Protein Content</div>
+                    <div class="health-tip-content">Paneer is an excellent source of protein, making it perfect for muscle building and recovery. Ideal for fitness enthusiasts and growing children.</div>
+                </div>
+                <div class="health-tip-card">
+                    <div class="health-tip-icon">🦴</div>
+                    <div class="health-tip-title">Rich in Calcium</div>
+                    <div class="health-tip-content">Packed with calcium for strong bones and teeth. Regular consumption helps maintain bone density and reduces osteoporosis risk.</div>
+                </div>
+                <div class="health-tip-card">
+                    <div class="health-tip-icon">🧠</div>
+                    <div class="health-tip-title">Brain Health</div>
+                    <div class="health-tip-content">Contains phosphorus and vitamin B12, essential for brain function, memory improvement, and nervous system health.</div>
+                </div>
+                <div class="health-tip-card">
+                    <div class="health-tip-icon">⚡</div>
+                    <div class="health-tip-title">Low Carb Option</div>
+                    <div class="health-tip-content">With minimal carbohydrates, it's perfect for low-carb diets and helps maintain steady blood sugar levels throughout the day.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="reviews-section">
+            <h2 class="section-title">⭐ Customer Reviews</h2>
+            <div class="reviews-container" id="reviewsContainer">
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-user">Priya Sharma</div>
+                        <div class="review-rating">★★★★★ 5.0</div>
+                    </div>
+                    <div class="review-text">"Absolutely delicious and perfectly grilled! The paneer is soft and the spices are perfectly balanced. Highly recommended!"</div>
+                    <div class="review-date">2 weeks ago</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-user">Raj Kumar</div>
+                        <div class="review-rating">★★★★☆ 4.5</div>
+                    </div>
+                    <div class="review-text">"Great taste and good portion size. Would love to have more variety in the sauce options."</div>
+                    <div class="review-date">3 weeks ago</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-user">Neha Patel</div>
+                        <div class="review-rating">★★★★★ 5.0</div>
+                    </div>
+                    <div class="review-text">"Perfect for my diet! High protein, tasty, and the delivery was quick. This is now my regular order!"</div>
+                    <div class="review-date">1 month ago</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 60px;"></div>
+    </div>
+
+    <script>
+        // Item details data
+        const itemDetailsData = {
+            "Paneer Tikka": {
+                image: "https://img.freepik.com/premium-photo/paneer-tikka-served-green-chutney-lemon-sliced-onions-selective-focus_466689-72615.jpg?w=1060",
+                price: "₹747",
+                description: "Tender pieces of paneer marinated in yogurt and spices, char-grilled to perfection. A classic North Indian appetizer that's healthy, protein-rich, and bursting with authentic flavors.",
+                rating: "4.8",
+                nutrition: { calories: 180, protein: "22g", carbs: "5g", fat: "8g", fiber: "2g", sodium: "450mg" },
+                ingredients: ["Paneer Cheese", "Yogurt", "Red Chili Powder", "Onions", "Lemon Juice", "Garlic & Ginger"]
+            },
+            "Chicken Wings": {
+                image: "https://img.freepik.com/free-photo/front-view-fried-chicken-wings-plate-with-sauce-lemon_141793-3269.jpg?w=1060",
+                price: "₹830",
+                description: "Spicy crispy chicken wings coated with aromatic Indian spices and deep-fried to golden perfection. Served with tangy mint chutney and fresh lemon wedges.",
+                rating: "4.7",
+                nutrition: { calories: 320, protein: "28g", carbs: "8g", fat: "18g", fiber: "1g", sodium: "620mg" },
+                ingredients: ["Chicken Wings", "Ginger-Garlic Paste", "Chili Powder", "Turmeric", "Yogurt", "Oil"]
+            },
+            "Seekh Kebab": {
+                image: "https://img.freepik.com/premium-photo/close-up-meat-seekh-kebab-served-with-green-chutney-lemon-onion_141793-7341.jpg?w=1060",
+                price: "₹912",
+                description: "Succulent minced meat kebab pressed onto skewers and cooked on a vertical rotisserie. Juicy, aromatic, and perfectly spiced with traditional Indian seasonings.",
+                rating: "4.9",
+                nutrition: { calories: 280, protein: "30g", carbs: "4g", fat: "15g", fiber: "0g", sodium: "580mg" },
+                ingredients: ["Ground Meat", "Onions", "Cilantro", "Ginger-Garlic", "Green Chili", "Spices"]
+            },
+            "Butter Chicken": {
+                image: "https://img.freepik.com/premium-photo/butter-chicken-served-with-naan_141793-4876.jpg?w=1060",
+                price: "₹912",
+                description: "Tender chicken pieces in a creamy tomato-based gravy enriched with butter and cream. A restaurant favorite that's rich, comforting, and absolutely delicious.",
+                rating: "4.9",
+                nutrition: { calories: 320, protein: "25g", carbs: "12g", fat: "20g", fiber: "2g", sodium: "680mg" },
+                ingredients: ["Chicken Breast", "Butter", "Cream", "Tomato Puree", "Onions", "Spices"]
+            },
+            "Chocolate Cake": {
+                image: "https://img.freepik.com/free-photo/chocolate-cake-slice-plate_141793-2456.jpg?w=1060",
+                price: "₹580",
+                description: "Rich, moist chocolate cake with a fudgy texture and decadent chocolate frosting. Layers of pure chocolate goodness that will satisfy any sweet craving.",
+                rating: "4.9",
+                nutrition: { calories: 420, protein: "6g", carbs: "54g", fat: "22g", fiber: "1g", sodium: "280mg" },
+                ingredients: ["Flour", "Cocoa Powder", "Eggs", "Butter", "Sugar", "Chocolate"]
+            },
+            "Caesar Salad": {
+                image: "https://img.freepik.com/free-photo/caesar-salad-with-parmesan_141793-2345.jpg?w=1060",
+                price: "₹747",
+                description: "Crisp romaine lettuce tossed with creamy Caesar dressing, crunchy croutons, and shaved parmesan cheese. A light, refreshing, and healthy choice.",
+                rating: "4.7",
+                nutrition: { calories: 220, protein: "14g", carbs: "16g", fat: "12g", fiber: "3g", sodium: "320mg" },
+                ingredients: ["Romaine Lettuce", "Parmesan Cheese", "Caesar Dressing", "Croutons"]
+            },
+            "Tomato Soup": {
+                image: "https://img.freepik.com/free-photo/tomato-soup-bread-wooden-table_141793-3238.jpg?w=1060",
+                price: "₹414",
+                description: "Velvety smooth tomato soup infused with fresh herbs and aromatic spices. Warm, comforting, and perfect as a starter or light meal.",
+                rating: "4.7",
+                nutrition: { calories: 140, protein: "4g", carbs: "18g", fat: "6g", fiber: "2g", sodium: "380mg" },
+                ingredients: ["Tomatoes", "Cream", "Onions", "Garlic", "Basil", "Vegetable Broth"]
+            },
+            "Hakka Noodles": {
+                image: "https://img.freepik.com/free-photo/hakka-noodles-served-wooden-plate_141793-3567.jpg?w=1060",
+                price: "₹663",
+                description: "Stir-fried noodles cooked with fresh vegetables, soy sauce, and aromatic spices. A classic Indo-Chinese favorite that's quick, satisfying, and absolutely delicious.",
+                rating: "4.7",
+                nutrition: { calories: 380, protein: "12g", carbs: "48g", fat: "14g", fiber: "3g", sodium: "520mg" },
+                ingredients: ["Noodles", "Vegetables", "Soy Sauce", "Garlic", "Ginger", "Oil"]
+            }
+        };
+
+        function loadItemDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const itemName = params.get('item');
+            const category = params.get('category');
+
+            // Set back button link
+            document.getElementById('backBtn').href = `menu-details.html?category=${category}`;
+
+            if (!itemName || !itemDetailsData[itemName]) {
+                // Load default item (Paneer Tikka)
+                loadItem('Paneer Tikka', category);
+            } else {
+                loadItem(itemName, category);
+            }
+        }
+
+        function loadItem(itemName, category) {
+            const item = itemDetailsData[itemName];
+            if (!item) return;
+
+            document.getElementById('itemTitle').textContent = itemName;
+            document.getElementById('itemImage').src = item.image;
+            document.getElementById('itemNameDetail').textContent = itemName;
+            document.getElementById('itemDescriptionDetail').textContent = item.description;
+            document.getElementById('itemPrice').textContent = item.price;
+            document.getElementById('ratingBadge').textContent = `★ ${item.rating}`;
+
+            document.getElementById('caloriesValue').textContent = item.nutrition.calories;
+            document.getElementById('proteinValue').textContent = item.nutrition.protein;
+            document.getElementById('carbsValue').textContent = item.nutrition.carbs;
+            document.getElementById('fatValue').textContent = item.nutrition.fat;
+            document.getElementById('fiberValue').textContent = item.nutrition.fiber;
+            document.getElementById('sodiumValue').textContent = item.nutrition.sodium;
+
+            const ingredientsList = document.getElementById('ingredientsList');
+            ingredientsList.innerHTML = item.ingredients.map(ing => {
+                const icons = { 'Paneer': '🧀', 'Yogurt': '🥛', 'Chicken': '🍗', 'Meat': '🍖', 'Tomato': '🍅', 'Onion': '🧅', 'Lemon': '🍋', 'Garlic': '🧄', 'Chili': '🌶️', 'Oil': '🫒', 'Flour': '🌾', 'Cheese': '🧀', 'Eggs': '🥚', 'Butter': '🧈', 'Sugar': '🍭', 'Chocolate': '🍫', 'Lettuce': '🥬', 'Cream': '🥛', 'Herbs': '🌿', 'Spices': '✨', 'Broth': '🥣', 'Vegetables': '🥦', 'Noodles': '🍜', 'Soy': '🫘', 'Ginger': '👃' };
+                let icon = '✨';
+                for (let key in icons) {
+                    if (ing.includes(key)) {
+                        icon = icons[key];
+                        break;
+                    }
+                }
+                return `<div class="ingredient-item"><span class="ingredient-icon">${icon}</span> ${ing}</div>`;
+            }).join('');
+
+            document.title = `${itemName} - Food Munch`;
+        }
+
+        function addToCart() {
+            const itemName = document.getElementById('itemTitle').textContent;
+            const price = document.getElementById('itemPrice').textContent;
+            alert(`Added "${itemName}" (${price}) to cart! 🛒`);
+        }
+
+        // Load profile image
+        (function loadUserProfile() {
+            try {
+                const raw = localStorage.getItem('fm_user_profile');
+                if (!raw) return;
+                const profile = JSON.parse(raw);
+                if (profile && profile.photoDataUrl) {
+                    const imgs = document.querySelectorAll('.foodmunch-image, .navbar-profile-logo');
+                    imgs.forEach(img => { img.src = profile.photoDataUrl; img.alt = profile.name || 'User'; });
+                }
+            } catch (e) {
+                console.error('Error loading profile:', e);
+            }
+        })();
+
+        window.addEventListener('storage', function (ev) {
+            if (ev.key === 'fm_user_profile' || ev.key === 'fm_storage_update') {
+                try {
+                    const p = JSON.parse(ev.newValue || '{}');
+                    if (p && p.photoDataUrl) document.querySelectorAll('.foodmunch-image, .navbar-profile-logo').forEach(i => i.src = p.photoDataUrl);
+                } catch (e) { }
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', loadItemDetails);
+    </script>
+</body>
+
+</html>

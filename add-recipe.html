@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe - Food Munch</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link rel="stylesheet" href="food.css">
+    <link rel="stylesheet" href="add-recipe.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <a class="navbar-brand" href="profile.html"><img src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/food-munch-img.png" class="foodmunch-image navbar-profile-logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="food.html">Home</a>
+                <a class="nav-item nav-link" href="food.html#wcusection">why choose us?</a>
+                <a class="nav-item nav-link" href="food.html#exploresection">explore menu</a>
+                <a class="nav-item nav-link" href="food.html#deliverysection">delivery & payment</a>
+                <a class="nav-item nav-link active" href="add-recipe.html">add recipe <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="followers.html">follow us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="add-recipe-container">
+        <div class="container mt-5 pt-5">
+            <div class="row">
+                <div class="col-12 col-md-8 offset-md-2">
+                    <div class="recipe-header">
+                        <h1 class="add-recipe-heading">🍳 Share Your Recipe</h1>
+                        <p class="recipe-subtitle">Create and share your amazing culinary masterpiece with our community</p>
+                    </div>
+                    
+                    <form id="recipeForm" class="recipe-form">
+                        <!-- Step 1: Basic Info -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">1</span>
+                                <h3 class="section-title">Basic Information</h3>
+                            </div>
+                            
+                            <!-- Recipe Title -->
+                            <div class="form-group">
+                                <label for="recipeTitle" class="form-label">📝 Recipe Title</label>
+                                <input type="text" class="form-control" id="recipeTitle" placeholder="e.g., Chocolate Chip Cookies" required>
+                                <small class="form-hint">Give your recipe an appetizing name</small>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="form-group">
+                                <label for="recipeDescription" class="form-label">📖 Description</label>
+                                <textarea class="form-control" id="recipeDescription" rows="4" placeholder="Tell us about your recipe... Where did you get it? What makes it special?" required></textarea>
+                                <small class="form-hint">Share the story behind your recipe</small>
+                            </div>
+
+                            <!-- Category Selection -->
+                            <div class="form-group">
+                                <label for="recipeCategory" class="form-label">📂 Category</label>
+                                <select class="form-control" id="recipeCategory" required>
+                                    <option value="">-- Select Category --</option>
+                                </select>
+                                <small class="form-hint">Choose the category for your recipe</small>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Ingredients -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">2</span>
+                                <h3 class="section-title">Ingredients</h3>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="ingredients" class="form-label">🥘 Ingredients List</label>
+                                <textarea class="form-control" id="ingredients" rows="6" placeholder="Enter ingredients (one per line)&#10;Example:&#10;2 cups flour&#10;1 large egg&#10;1 cup milk&#10;2 tbsp butter" required></textarea>
+                                <small class="form-hint">Enter each ingredient on a new line with quantity and unit</small>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Media -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <span class="section-number">3</span>
+                                <h3 class="section-title">Add Media</h3>
+                            </div>
+                            
+                            <!-- Image Upload -->
+                            <div class="form-group">
+                                <label for="foodImage" class="form-label">📷 Recipe Image</label>
+                                <div class="custom-file-upload">
+                                    <input type="file" id="foodImage" class="form-control-file" accept="image/*">
+                                    <label for="foodImage" class="file-label">
+                                        <div class="upload-icon">📸</div>
+                                        <div class="upload-text">Click to upload or drag image here</div>
+                                        <div class="upload-subtext">PNG, JPG, GIF up to 5MB</div>
+                                    </label>
+                                    <div id="imagePreview" class="image-preview mt-3" style="display: none;">
+                                        <img id="previewImg" src="" alt="Preview" class="preview-img">
+                                        <button type="button" class="btn btn-sm btn-danger mt-3" onclick="clearImagePreview()">✕ Remove Image</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Video Upload -->
+                            <div class="form-group">
+                                <label for="foodVideo" class="form-label">🎥 Recipe Video <span class="optional">(Optional)</span></label>
+                                <div class="custom-file-upload">
+                                    <input type="file" id="foodVideo" class="form-control-file" accept="video/*">
+                                    <label for="foodVideo" class="file-label">
+                                        <div class="upload-icon">🎬</div>
+                                        <div class="upload-text">Click to upload or drag video here</div>
+                                        <div class="upload-subtext">MP4, WebM up to 50MB</div>
+                                    </label>
+                                    <div id="videoPreview" class="video-preview mt-3" style="display: none;">
+                                        <video id="previewVideo" class="preview-video" controls></video>
+                                        <button type="button" class="btn btn-sm btn-danger mt-3" onclick="clearVideoPreview()">✕ Remove Video</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-upload">
+                                <span class="btn-icon">📤</span>
+                                Share My Recipe
+                            </button>
+                            <a href="food.html" class="btn btn-cancel">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image Preview
+        document.getElementById('foodImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('previewImg').src = event.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Video Preview
+        document.getElementById('foodVideo').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('previewVideo').src = event.target.result;
+                    document.getElementById('videoPreview').style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Clear Image Preview
+        function clearImagePreview() {
+            document.getElementById('foodImage').value = '';
+            document.getElementById('imagePreview').style.display = 'none';
+        }
+
+        // Clear Video Preview
+        function clearVideoPreview() {
+            document.getElementById('foodVideo').value = '';
+            document.getElementById('videoPreview').style.display = 'none';
+        }
+
+        // Load categories from API
+        async function loadCategories() {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/categories');
+                const categories = await response.json();
+                const select = document.getElementById('recipeCategory');
+                select.innerHTML = '<option value="">-- Select Category --</option>';
+                categories.forEach(cat => {
+                    const option = document.createElement('option');
+                    option.value = cat.id;
+                    option.textContent = cat.name;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading categories:', error);
+                alert('Error loading categories. Make sure the backend is running.');
+            }
+        }
+
+        // Load categories when page loads
+        loadCategories();
+
+        // Form Submission
+        document.getElementById('recipeForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('recipeTitle').value;
+            const description = document.getElementById('recipeDescription').value;
+            const ingredients = document.getElementById('ingredients').value;
+            const categoryId = document.getElementById('recipeCategory').value;
+            
+            if (!categoryId) {
+                alert('Please select a category');
+                return;
+            }
+
+            // Get image as base64 if uploaded
+            let imageUrl = null;
+            const imageFile = document.getElementById('foodImage').files[0];
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
+                    imageUrl = e.target.result; // base64 data URL
+                    await submitRecipe(title, description, ingredients, categoryId, imageUrl);
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                await submitRecipe(title, description, ingredients, categoryId, null);
+            }
+        });
+
+        async function submitRecipe(title, description, ingredients, categoryId, imageUrl) {
+            try {
+                // For now, use user_id = 1 (you can get this from login later)
+                const userId = 1;
+                
+                const response = await fetch('http://127.0.0.1:5000/recipes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        category_id: parseInt(categoryId),
+                        title: title,
+                        description: description,
+                        ingredients_text: ingredients,
+                        image_url: imageUrl,
+                        video_url: null
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert(`Recipe "${title}" uploaded successfully!`);
+                    
+                    // Update localStorage (optional)
+                    try {
+                        const raw = localStorage.getItem('fm_user_profile');
+                        const profile = raw ? JSON.parse(raw) : {};
+                        profile.recipesCount = (profile.recipesCount || 0) + 1;
+                        localStorage.setItem('fm_user_profile', JSON.stringify(profile));
+                    } catch (e) { console.error(e); }
+
+                    // Reset form
+                    document.getElementById('recipeForm').reset();
+                    document.getElementById('imagePreview').style.display = 'none';
+                    document.getElementById('videoPreview').style.display = 'none';
+                    
+                    // Redirect to home page
+                    window.location.href = 'food.html';
+                } else {
+                    alert('Error: ' + (result.error || 'Failed to save recipe'));
+                }
+            } catch (error) {
+                console.error('Error submitting recipe:', error);
+                alert('Network error. Make sure the backend is running on http://127.0.0.1:5000');
+            }
+        }
+        
+        // Load user profile photo on page load
+        (function() {
+            try {
+                const raw = localStorage.getItem('fm_user_profile');
+                if (!raw) return;
+                const profile = JSON.parse(raw);
+                if (profile && profile.photoDataUrl) {
+                    document.querySelectorAll('.foodmunch-image, .navbar-profile-logo').forEach(img => img.src = profile.photoDataUrl);
+                }
+            } catch(e) { console.error(e); }
+        })();
+    </script>
+</body>
+
+</html>

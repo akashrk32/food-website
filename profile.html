@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Profile - Food Munch</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="food.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <a class="navbar-brand" href="profile.html"><img src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/food-munch-img.png" class="foodmunch-image navbar-profile-logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="food.html">Home</a>
+                <a class="nav-item nav-link" href="add-recipe.html">Add Recipe</a>
+                <a class="nav-item nav-link" href="login.html">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Cover Section -->
+    <div class="profile-cover"></div>
+
+    <!-- Profile Main Content -->
+    <div class="profile-container">
+        <div class="container">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-photo-container">
+                    <img id="profilePhoto" src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/food-munch-img.png" class="profile-photo" alt="Profile">
+                    <div class="photo-overlay">
+                        <input type="file" id="profileUpload" accept="image/*" style="display:none">
+                        <button id="changePhotoBtn" class="btn-change-photo" title="Change Photo">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h1 id="profileName" class="profile-name">Your Name</h1>
+                    <p id="profileEmail" class="profile-email">📧 your@email.com</p>
+                    <p id="profileBio" class="profile-bio">Food enthusiast 🍽️ Cooking & sharing delicious recipes</p>
+                    <div class="profile-meta">
+                        <span class="meta-item">👤 <span id="profileMemberSince">Member since Feb 2025</span></span>
+                        <span class="meta-item">📍 <span id="profileLocation">Location not set</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <div class="stat-item">
+                    <div class="stat-number" id="recipesCount">0</div>
+                    <div class="stat-label">Recipes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="followersCount">0</div>
+                    <div class="stat-label">Followers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="followingCount">0</div>
+                    <div class="stat-label">Following</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalViews">0</div>
+                    <div class="stat-label">Total Views</div>
+                </div>
+            </div>
+
+            <!-- Main Content Row -->
+            <div class="row mt-4">
+                <!-- Edit Profile Form -->
+                <div class="col-12 col-lg-8">
+                    <div class="profile-section">
+                        <h3 class="section-title">Edit Profile</h3>
+                        <form id="profileForm">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputName" class="form-label-custom">Full Name</label>
+                                    <input type="text" class="form-control form-control-custom" id="inputName" placeholder="Enter your name">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputEmail" class="form-label-custom">Email Address</label>
+                                    <input type="email" class="form-control form-control-custom" id="inputEmail" placeholder="your@email.com">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="inputBio" class="form-label-custom">Bio</label>
+                                <textarea class="form-control form-control-custom" id="inputBio" rows="3" placeholder="Tell something about yourself..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="inputLocation" class="form-label-custom">📍 Location</label>
+                                <input type="text" class="form-control form-control-custom" id="inputLocation" placeholder="e.g., New York, USA">
+                            </div>
+
+                            <div class="button-group">
+                                <button type="submit" class="btn btn-save">Save Changes</button>
+                                <button id="logoutBtn" type="button" class="btn btn-danger" style="margin-top: 10px; width: 100%;">🚪 Logout</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Sidebar Stats -->
+                <div class="col-12 col-lg-4">
+                    <div class="profile-section sidebar-card">
+                        <h3 class="section-title">Account Info</h3>
+                        <div class="info-item">
+                            <span class="info-label">Member Since:</span>
+                            <span class="info-value" id="memberSince">Feb 2025</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Total Recipes:</span>
+                            <span class="info-value" id="totalRecipesSidebar">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Engagement:</span>
+                            <span class="info-value" id="engagement">Low</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Recipes Section -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="profile-section">
+                        <h3 class="section-title">My Recipes</h3>
+                        <div class="details-grid" id="myRecipesContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 30px;">
+                            <!-- User's recipes will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .recipe-card-profile {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+        }
+        .recipe-card-profile:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(208, 178, 0, 0.3);
+            border-color: #d0b200;
+        }
+        .recipe-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+        .recipe-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .recipe-content-profile {
+            padding: 20px;
+        }
+        .recipe-title-profile {
+            font-size: 18px;
+            font-weight: 700;
+            color: #183b56;
+            margin-bottom: 8px;
+        }
+        .recipe-description-profile {
+            font-size: 13px;
+            color: #5a7184;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .recipe-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-edit, .btn-delete {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-edit {
+            background: linear-gradient(135deg, #d0b200 0%, #e6c700 100%);
+            color: white;
+        }
+        .btn-edit:hover {
+            background: linear-gradient(135deg, #e6c700 0%, #f5d700 100%);
+            transform: translateY(-2px);
+        }
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+        }
+        .btn-delete:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+        .profile-meta {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .meta-item {
+            font-size: 14px;
+            color: #5a7184;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .profile-bio {
+            font-size: 16px;
+            color: #5a7184;
+            margin-top: 10px;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-item {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 3px solid #d0b200;
+        }
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(208, 178, 0, 0.2);
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #d0b200;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #7b8794;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+
+    <script>
+        // Check if user is logged in
+        window.addEventListener('DOMContentLoaded', function() {
+            const user = localStorage.getItem('fm_user_profile');
+            if (!user) {
+                // Not logged in, redirect to login
+                window.location.href = 'login.html';
+                return;
+            }
+            try {
+                const profile = JSON.parse(user);
+                if (!profile.isLoggedIn || !profile.email) {
+                    // Not properly logged in, redirect to login
+                    window.location.href = 'login.html';
+                    return;
+                }
+            } catch(e) {
+                // Invalid login data, redirect to login
+                window.location.href = 'login.html';
+                return;
+            }
+            loadToUI();
+            loadMyRecipes(); // Load user's recipes
+        });
+
+        // Utilities
+        function getProfile() {
+            try { return JSON.parse(localStorage.getItem('fm_user_profile') || '{}'); } catch(e){return{}};
+        }
+        function saveProfile(p) { localStorage.setItem('fm_user_profile', JSON.stringify(p)); }
+        
+        // Calculate engagement level
+        function getEngagementLevel(followers, recipes) {
+            if (followers + recipes > 10) return 'High';
+            if (followers + recipes > 5) return 'Medium';
+            return 'Low';
+        }
+
+        // Load profile to UI
+        function loadToUI() {
+            const p = getProfile();
+            document.getElementById('profileName').textContent = p.name || 'Your Name';
+            document.getElementById('profileEmail').textContent = '📧 ' + (p.email || 'your@email.com');
+            document.getElementById('profileBio').textContent = p.bio || 'Food enthusiast 🍽️ Cooking & sharing delicious recipes';
+            document.getElementById('inputName').value = p.name || '';
+            document.getElementById('inputEmail').value = p.email || '';
+            document.getElementById('inputBio').value = p.bio || '';
+            document.getElementById('inputLocation').value = p.location || '';
+            document.getElementById('recipesCount').textContent = p.recipesCount || 0;
+            document.getElementById('followersCount').textContent = p.followers || 0;
+            document.getElementById('followingCount').textContent = p.following || 0;
+            document.getElementById('totalRecipesSidebar').textContent = p.recipesCount || 0;
+            document.getElementById('totalViews').textContent = p.totalViews || 0;
+            document.getElementById('engagement').textContent = getEngagementLevel(p.followers || 0, p.recipesCount || 0);
+            const memberSince = p.memberSince || 'Feb 2025';
+            document.getElementById('memberSince').textContent = 'Member since ' + memberSince;
+            document.getElementById('profileMemberSince').textContent = 'Member since ' + memberSince;
+            document.getElementById('profileLocation').textContent = p.location || 'Location not set';
+            
+            if (p.photoDataUrl) {
+                document.getElementById('profilePhoto').src = p.photoDataUrl;
+                document.querySelectorAll('.foodmunch-image, .navbar-profile-logo').forEach(i=>i.src = p.photoDataUrl);
+            }
+        }
+
+        // Handle photo change
+        document.getElementById('changePhotoBtn').addEventListener('click', function(){
+            document.getElementById('profileUpload').click();
+        });
+
+        document.getElementById('profileUpload').addEventListener('change', function(e){
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev){
+                const dataUrl = ev.target.result;
+                document.getElementById('profilePhoto').src = dataUrl;
+                const p = getProfile(); 
+                p.photoDataUrl = dataUrl; 
+                saveProfile(p);
+                document.querySelectorAll('.foodmunch-image, .navbar-profile-logo').forEach(i=>i.src = dataUrl);
+                // Trigger storage event for other pages
+                try { localStorage.setItem('fm_storage_update', Date.now()); } catch(e){}
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Save profile form
+        document.getElementById('profileForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const p = getProfile();
+            p.name = document.getElementById('inputName').value.trim() || p.name;
+            p.email = document.getElementById('inputEmail').value.trim() || p.email;
+            p.bio = document.getElementById('inputBio').value.trim() || '';
+            p.location = document.getElementById('inputLocation').value.trim() || '';
+            saveProfile(p);
+            loadToUI();
+            alert('✓ Profile saved successfully!');
+        });
+
+        // Load user's recipes
+        async function loadMyRecipes() {
+            try {
+                // For now, use user_id = 1 (get from login later)
+                const userId = 1;
+                const response = await fetch(`http://127.0.0.1:5000/users/${userId}/recipes`);
+                const recipes = await response.json();
+                
+                // Update recipe count from database
+                const p = getProfile();
+                p.recipesCount = recipes.length;
+                saveProfile(p);
+                document.getElementById('recipesCount').textContent = recipes.length;
+                document.getElementById('totalRecipesSidebar').textContent = recipes.length;
+                
+                const container = document.getElementById('myRecipesContainer');
+                if (recipes.length === 0) {
+                    container.innerHTML = '<p style="color: #7b8794; text-align: center; padding: 40px;">No recipes yet. <a href="add-recipe.html">Add your first recipe!</a></p>';
+                    return;
+                }
+                
+                container.innerHTML = recipes.map(recipe => {
+                    // Handle base64 images or regular URLs
+                    let imageSrc = 'https://via.placeholder.com/400x250?text=No+Image';
+                    if (recipe.image_url) {
+                        if (recipe.image_url.startsWith('data:image')) {
+                            // Base64 image
+                            imageSrc = recipe.image_url;
+                        } else if (recipe.image_url.startsWith('http')) {
+                            // Regular URL
+                            imageSrc = recipe.image_url;
+                        } else {
+                            // Try as base64
+                            imageSrc = recipe.image_url;
+                        }
+                    }
+                    
+                    return `
+                        <div class="recipe-card-profile">
+                            <div class="recipe-image-wrapper">
+                                <img src="${imageSrc}" alt="${recipe.title}" onerror="this.src='https://via.placeholder.com/400x250?text=No+Image'">
+                            </div>
+                            <div class="recipe-content-profile">
+                                <h4 class="recipe-title-profile">${recipe.title}</h4>
+                                <p class="recipe-description-profile">${recipe.description.substring(0, 80)}${recipe.description.length > 80 ? '...' : ''}</p>
+                                <p style="font-size: 12px; color: #7b8794; margin-bottom: 10px;">📂 ${recipe.category_name || 'Uncategorized'}</p>
+                                <div class="recipe-actions">
+                                    <button class="btn-edit" onclick="editRecipe(${recipe.id})">✏️ Edit</button>
+                                    <button class="btn-delete" onclick="deleteRecipe(${recipe.id})">🗑️ Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading recipes:', error);
+                document.getElementById('myRecipesContainer').innerHTML = '<p style="color: #e74c3c;">Error loading recipes. Make sure backend is running.</p>';
+            }
+        }
+
+        function editRecipe(recipeId) {
+            alert(`Edit recipe ID: ${recipeId}\n\nEdit functionality coming soon!`);
+        }
+
+        async function deleteRecipe(recipeId) {
+            if (!confirm('Are you sure you want to delete this recipe?')) return;
+            
+            try {
+                const response = await fetch(`http://127.0.0.1:5000/recipes/${recipeId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    alert('Recipe deleted successfully!');
+                    loadMyRecipes(); // Reload recipes
+                    // Update recipe count
+                    const p = getProfile();
+                    p.recipesCount = Math.max(0, (p.recipesCount || 0) - 1);
+                    saveProfile(p);
+                    loadToUI();
+                } else {
+                    alert('Error deleting recipe');
+                }
+            } catch (error) {
+                console.error('Error deleting recipe:', error);
+                alert('Error deleting recipe. Make sure backend is running.');
+            }
+        }
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function(){
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear login data but keep profile data
+                const p = getProfile();
+                p.isLoggedIn = false;
+                localStorage.setItem('fm_user_profile', JSON.stringify(p));
+                
+                // Redirect to login
+                alert('✓ Logged out successfully!');
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Listen for storage updates from other pages
+        window.addEventListener('storage', function(ev) {
+            if (ev.key === 'fm_user_profile' || ev.key === 'fm_storage_update') {
+                loadToUI();
+            }
+        });
+    </script>
+</body>
+</html>
