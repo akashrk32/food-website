@@ -712,7 +712,7 @@
 
             // Load community recipes from database and mix with menu items
             try {
-                const response = await fetch(`http://127.0.0.1:5000/categories/${encodeURIComponent(category)}/recipes`);
+                const response = await fetch(`/categories/${encodeURIComponent(category)}/recipes`);
                 const recipes = await response.json();
                 
                 // Add community recipes to the same grid as menu items

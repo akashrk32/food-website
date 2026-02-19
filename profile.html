@@ -373,7 +373,7 @@
             try {
                 // For now, use user_id = 1 (get from login later)
                 const userId = 1;
-                const response = await fetch(`http://127.0.0.1:5000/users/${userId}/recipes`);
+                const response = await fetch(`/users/${userId}/recipes`);
                 const recipes = await response.json();
                 
                 // Update recipe count from database
@@ -436,7 +436,7 @@
             if (!confirm('Are you sure you want to delete this recipe?')) return;
             
             try {
-                const response = await fetch(`http://127.0.0.1:5000/recipes/${recipeId}`, {
+                const response = await fetch(`/recipes/${recipeId}`, {
                     method: 'DELETE'
                 });
                 
