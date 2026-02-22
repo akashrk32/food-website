@@ -1,10 +1,25 @@
 from flask import Flask, jsonify, send_from_directory, request
 from flask_cors import CORS
+from dotenv import load_dotenv
+from werkzeug.utils import secure_filename
 import mysql.connector
 import os
+import uuid
+
+load_dotenv()  # loads variables from .env into os.environ
 
 app = Flask(__name__, static_folder='../', static_url_path='')
 CORS(app)
+
+# -------------------------
+# Uploads Setup
+# -------------------------
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), '..', 'uploads')
+ALLOWED_IMAGE_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+def allowed_image(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_IMAGE_EXTENSIONS
 
 
 # -------------------------
@@ -116,7 +131,34 @@ def get_recipes_by_category_name(name):
 @app.route("/recipes", methods=["POST"])
 def create_recipe():
     try:
-        data = request.json
+        # Support both multipart/form-data (file upload) and JSON
+        if request.content_type and 'multipart/form-data' in request.content_type:
+            user_id = request.form.get('user_id')
+            category_id = request.form.get('category_id')
+            title = request.form.get('title')
+            description = request.form.get('description')
+            ingredients_text = request.form.get('ingredients_text')
+            video_url = request.form.get('video_url') or None
+
+            # Handle image file upload
+            image_url = None
+            if 'image' in request.files:
+                file = request.files['image']
+                if file and file.filename and allowed_image(file.filename):
+                    ext = file.filename.rsplit('.', 1)[1].lower()
+                    filename = f"{uuid.uuid4().hex}.{ext}"
+                    file.save(os.path.join(UPLOAD_FOLDER, filename))
+                    image_url = f'/uploads/{filename}'
+        else:
+            data = request.json
+            user_id = data.get('user_id')
+            category_id = data.get('category_id')
+            title = data.get('title')
+            description = data.get('description')
+            ingredients_text = data.get('ingredients_text')
+            image_url = data.get('image_url')
+            video_url = data.get('video_url')
+
         db = get_db()
         cursor = db.cursor()
         cursor.execute("""
@@ -124,19 +166,53 @@ def create_recipe():
             (user_id, category_id, title, description, ingredients_text, image_url, video_url)
             VALUES (%s, %s, %s, %s, %s, %s, %s)
         """, (
-            data.get("user_id"),
-            data.get("category_id"),
-            data.get("title"),
-            data.get("description"),
-            data.get("ingredients_text"),
-            data.get("image_url"),
-            data.get("video_url"),
+            user_id,
+            category_id,
+            title,
+            description,
+            ingredients_text,
+            image_url,
+            video_url,
         ))
         db.commit()
         recipe_id = cursor.lastrowid
         cursor.close()
         db.close()
         return jsonify({"id": recipe_id, "message": "Recipe created successfully"}), 201
+    except mysql.connector.Error as err:
+        return jsonify({"error": str(err)}), 500
+
+
+# -------------------------
+# Serve Uploaded Images
+# -------------------------
+@app.route("/uploads/<path:filename>")
+def serve_upload(filename):
+    return send_from_directory(UPLOAD_FOLDER, filename)
+
+
+# -------------------------
+# Get Single Recipe by Title
+# -------------------------
+@app.route("/recipes/by-title/<path:title>")
+def get_recipe_by_title(title):
+    try:
+        db = get_db()
+        cursor = db.cursor(dictionary=True)
+        cursor.execute("""
+            SELECT r.*, u.name AS user_name, c.name AS category_name
+            FROM recipes r
+            LEFT JOIN users u ON r.user_id = u.id
+            LEFT JOIN menu_categories c ON r.category_id = c.id
+            WHERE r.title = %s
+            LIMIT 1
+        """, (title,))
+        result = cursor.fetchone()
+        cursor.close()
+        db.close()
+        if result:
+            return jsonify(result)
+        return jsonify({"error": "Recipe not found"}), 404
     except mysql.connector.Error as err:
         return jsonify({"error": str(err)}), 500
 

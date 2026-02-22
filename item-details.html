@@ -5,11 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Item Details - Food Munch</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
     <link rel="stylesheet" href="food.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
     <style>
         body {
             background: linear-gradient(135deg, #f9fbfe 0%, #ffffff 100%);
@@ -395,8 +402,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
         }
 
         @media (max-width: 768px) {
@@ -438,8 +452,11 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-        <a class="navbar-brand" href="profile.html"><img src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/food-munch-img.png" alt="Food Munch Logo" class="foodmunch-image navbar-profile-logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="profile.html"><img
+                src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/food-munch-img.png"
+                alt="Food Munch Logo" class="foodmunch-image navbar-profile-logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -458,7 +475,7 @@
         <div class="container">
             <a href="menu-details.html?category=Back" class="back-button" id="backBtn">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
                 </svg>
                 Back to Menu
             </a>
@@ -471,7 +488,9 @@
             <!-- Image Section -->
             <div class="item-image-section">
                 <div class="main-image">
-                    <img id="itemImage" src="https://img.freepik.com/premium-photo/paneer-tikka-served-green-chutney-lemon-sliced-onions-selective-focus_466689-72615.jpg?w=1060" alt="Item">
+                    <img id="itemImage"
+                        src="https://img.freepik.com/premium-photo/paneer-tikka-served-green-chutney-lemon-sliced-onions-selective-focus_466689-72615.jpg?w=1060"
+                        alt="Item">
                     <div class="rating-badge" id="ratingBadge">★ 4.8</div>
                     <div class="price-tag" id="itemPrice">₹747</div>
                 </div>
@@ -480,7 +499,9 @@
             <!-- Info Section -->
             <div class="item-info-section">
                 <h1 id="itemNameDetail">Paneer Tikka</h1>
-                <p class="item-description" id="itemDescriptionDetail">Tender pieces of paneer marinated in yogurt and spices, char-grilled to perfection. A classic North Indian appetizer that's healthy, protein-rich, and bursting with authentic flavors.</p>
+                <p class="item-description" id="itemDescriptionDetail">Tender pieces of paneer marinated in yogurt and
+                    spices, char-grilled to perfection. A classic North Indian appetizer that's healthy, protein-rich,
+                    and bursting with authentic flavors.</p>
 
                 <!-- Nutrition Facts -->
                 <div class="nutrition-grid">
@@ -540,22 +561,26 @@
                 <div class="health-tip-card">
                     <div class="health-tip-icon">💪</div>
                     <div class="health-tip-title">High Protein Content</div>
-                    <div class="health-tip-content">Paneer is an excellent source of protein, making it perfect for muscle building and recovery. Ideal for fitness enthusiasts and growing children.</div>
+                    <div class="health-tip-content">Paneer is an excellent source of protein, making it perfect for
+                        muscle building and recovery. Ideal for fitness enthusiasts and growing children.</div>
                 </div>
                 <div class="health-tip-card">
                     <div class="health-tip-icon">🦴</div>
                     <div class="health-tip-title">Rich in Calcium</div>
-                    <div class="health-tip-content">Packed with calcium for strong bones and teeth. Regular consumption helps maintain bone density and reduces osteoporosis risk.</div>
+                    <div class="health-tip-content">Packed with calcium for strong bones and teeth. Regular consumption
+                        helps maintain bone density and reduces osteoporosis risk.</div>
                 </div>
                 <div class="health-tip-card">
                     <div class="health-tip-icon">🧠</div>
                     <div class="health-tip-title">Brain Health</div>
-                    <div class="health-tip-content">Contains phosphorus and vitamin B12, essential for brain function, memory improvement, and nervous system health.</div>
+                    <div class="health-tip-content">Contains phosphorus and vitamin B12, essential for brain function,
+                        memory improvement, and nervous system health.</div>
                 </div>
                 <div class="health-tip-card">
                     <div class="health-tip-icon">⚡</div>
                     <div class="health-tip-title">Low Carb Option</div>
-                    <div class="health-tip-content">With minimal carbohydrates, it's perfect for low-carb diets and helps maintain steady blood sugar levels throughout the day.</div>
+                    <div class="health-tip-content">With minimal carbohydrates, it's perfect for low-carb diets and
+                        helps maintain steady blood sugar levels throughout the day.</div>
                 </div>
             </div>
         </div>
@@ -569,7 +594,8 @@
                         <div class="review-user">Priya Sharma</div>
                         <div class="review-rating">★★★★★ 5.0</div>
                     </div>
-                    <div class="review-text">"Absolutely delicious and perfectly grilled! The paneer is soft and the spices are perfectly balanced. Highly recommended!"</div>
+                    <div class="review-text">"Absolutely delicious and perfectly grilled! The paneer is soft and the
+                        spices are perfectly balanced. Highly recommended!"</div>
                     <div class="review-date">2 weeks ago</div>
                 </div>
                 <div class="review-card">
@@ -577,7 +603,8 @@
                         <div class="review-user">Raj Kumar</div>
                         <div class="review-rating">★★★★☆ 4.5</div>
                     </div>
-                    <div class="review-text">"Great taste and good portion size. Would love to have more variety in the sauce options."</div>
+                    <div class="review-text">"Great taste and good portion size. Would love to have more variety in the
+                        sauce options."</div>
                     <div class="review-date">3 weeks ago</div>
                 </div>
                 <div class="review-card">
@@ -585,7 +612,8 @@
                         <div class="review-user">Neha Patel</div>
                         <div class="review-rating">★★★★★ 5.0</div>
                     </div>
-                    <div class="review-text">"Perfect for my diet! High protein, tasty, and the delivery was quick. This is now my regular order!"</div>
+                    <div class="review-text">"Perfect for my diet! High protein, tasty, and the delivery was quick. This
+                        is now my regular order!"</div>
                     <div class="review-date">1 month ago</div>
                 </div>
             </div>
@@ -663,19 +691,85 @@
             }
         };
 
-        function loadItemDetails() {
+        async function loadItemDetails() {
             const params = new URLSearchParams(window.location.search);
             const itemName = params.get('item');
             const category = params.get('category');
 
             // Set back button link
-            document.getElementById('backBtn').href = `menu-details.html?category=${category}`;
+            document.getElementById('backBtn').href = `menu-details.html?category=${category || ''}`;
 
-            if (!itemName || !itemDetailsData[itemName]) {
-                // Load default item (Paneer Tikka)
+            if (!itemName) {
                 loadItem('Paneer Tikka', category);
-            } else {
+                return;
+            }
+
+            // If it's in the local dictionary, use it directly
+            if (itemDetailsData[itemName]) {
                 loadItem(itemName, category);
+                return;
+            }
+
+            // Otherwise fetch from the database API
+            try {
+                const response = await fetch(`/recipes/by-title/${encodeURIComponent(itemName)}`);
+                if (response.ok) {
+                    const recipe = await response.json();
+                    loadRecipeFromDB(recipe);
+                } else {
+                    // Not found anywhere — show a message instead of wrong item
+                    document.getElementById('itemTitle').textContent = itemName;
+                    document.getElementById('itemNameDetail').textContent = itemName;
+                    document.getElementById('itemDescriptionDetail').textContent = 'Details not available for this item.';
+                    document.getElementById('itemImage').src = 'https://img.freepik.com/free-photo/top-view-table-food-arrangement_23-2149209716.jpg';
+                    document.title = `${itemName} - Food Munch`;
+                }
+            } catch (err) {
+                console.error('Error fetching recipe:', err);
+                loadItem('Paneer Tikka', category);
+            }
+        }
+
+        function loadRecipeFromDB(recipe) {
+            document.getElementById('itemTitle').textContent = recipe.title;
+            document.getElementById('itemNameDetail').textContent = recipe.title;
+            document.getElementById('itemDescriptionDetail').textContent = recipe.description || 'No description available.';
+
+            // Image: use uploaded image, fallback to a generic food image
+            document.getElementById('itemImage').src = recipe.image_url ||
+                'https://img.freepik.com/free-photo/top-view-table-food-arrangement_23-2149209716.jpg';
+
+            document.getElementById('itemPrice').textContent = '—';
+            document.getElementById('ratingBadge').textContent = '★ New';
+            document.title = `${recipe.title} - Food Munch`;
+
+            // Nutrition: not stored in DB, hide the section
+            document.querySelector('.nutrition-grid').style.display = 'none';
+
+            // Ingredients: parse from ingredients_text (one per line)
+            const ingredientsList = document.getElementById('ingredientsList');
+            if (recipe.ingredients_text) {
+                const lines = recipe.ingredients_text.split('\n').filter(l => l.trim());
+                ingredientsList.innerHTML = lines.map(ing => {
+                    const icons = { 'Paneer': '🧀', 'Yogurt': '🥛', 'Chicken': '🍗', 'Meat': '🍖', 'Tomato': '🍅', 'Onion': '🧅', 'Lemon': '🍋', 'Garlic': '🧄', 'Chili': '🌶️', 'Oil': '🫒', 'Flour': '🌾', 'Cheese': '🧀', 'Eggs': '🥚', 'Butter': '🧈', 'Sugar': '🍭', 'Chocolate': '🍫', 'Lettuce': '🥬', 'Cream': '🥛', 'Herbs': '🌿', 'Spices': '✨', 'Broth': '🥣', 'Vegetables': '🥦', 'Noodles': '🍜', 'Soy': '🫘', 'Ginger': '👃' };
+                    let icon = '✨';
+                    for (let key in icons) {
+                        if (ing.includes(key)) { icon = icons[key]; break; }
+                    }
+                    return `<div class="ingredient-item"><span class="ingredient-icon">${icon}</span> ${ing.trim()}</div>`;
+                }).join('');
+            } else {
+                ingredientsList.innerHTML = '<p>No ingredients listed.</p>';
+            }
+
+            // Hide health tips and reviews (DB recipes don't have these)
+            document.querySelector('.health-tips-section').style.display = 'none';
+            document.querySelector('.reviews-section').style.display = 'none';
+
+            // Show uploaded by info if available
+            if (recipe.user_name) {
+                document.getElementById('itemDescriptionDetail').textContent +=
+                    `\n\n👨‍🍳 Shared by: ${recipe.user_name}`;
             }
         }
 

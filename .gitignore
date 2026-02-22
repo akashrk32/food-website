@@ -1,0 +1,28 @@
+# Environment variables (contains DB passwords — never commit!)
+.env
+
+# Uploaded user files
+uploads/
+food_backend/uploads/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# VS Code (optional — keeps workspace clean)
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
