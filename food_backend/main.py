@@ -26,13 +26,20 @@ def allowed_image(filename):
 # Database Connection
 # -------------------------
 def get_db():
-    return mysql.connector.connect(
-        host=os.environ.get("MYSQLHOST", "localhost"),
+    host = os.environ.get("MYSQLHOST", "localhost")
+    use_ssl = host != "localhost"
+    conn_args = dict(
+        host=host,
         user=os.environ.get("MYSQLUSER", "root"),
         password=os.environ.get("MYSQLPASSWORD", ""),
         database=os.environ.get("MYSQLDATABASE", "1st_sql_project"),
         port=int(os.environ.get("MYSQLPORT", 3306)),
     )
+    if use_ssl:
+        conn_args["ssl_disabled"] = False
+        conn_args["ssl_verify_cert"] = False
+        conn_args["ssl_verify_identity"] = False
+    return mysql.connector.connect(**conn_args)
 
 
 
