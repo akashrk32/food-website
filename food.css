@@ -82,7 +82,8 @@ body {
 .section-bg-container {
     /* Hero background: fill the viewport across widths without leaving gaps */
     background-image: url('https://img.freepik.com/premium-photo/table-with-food-plate-food-that-says-food-it_1086760-104030.jpg');
-    background-size: cover; /* cover ensures full-width/height fill */
+    background-size: cover;
+    /* cover ensures full-width/height fill */
     background-position: center center;
     background-repeat: no-repeat;
     /* avoid fixed on mobile for better performance */
@@ -95,7 +96,8 @@ body {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    background-color: #fff7eb; /* subtle fallback color */
+    background-color: #fff7eb;
+    /* subtle fallback color */
 }
 
 .section-bg-container::before {
@@ -158,6 +160,7 @@ body {
         opacity: 0;
         transform: translateY(-30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -169,6 +172,7 @@ body {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -176,24 +180,30 @@ body {
 }
 
 @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-10px);
     }
 }
 
 @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0px) translateX(0px);
     }
+
     50% {
         transform: translateY(30px) translateX(-20px);
     }
 }
 
-.section-bg-container > div {
+.section-bg-container>div {
     position: relative;
     z-index: 2;
     width: 100%;
@@ -282,7 +292,7 @@ body {
     margin-bottom: 40px;
 }
 
-.card-contianer {
+.card-container {
     text-align: center;
     background-color: white;
     border: 2px solid #e5eaf4;
@@ -296,7 +306,7 @@ body {
     flex-direction: column;
 }
 
-.card-contianer::before {
+.card-container::before {
     content: '';
     position: absolute;
     top: 0;
@@ -307,13 +317,13 @@ body {
     transition: left 0.5s ease;
 }
 
-.card-contianer:hover {
+.card-container:hover {
     transform: translateY(-15px) scale(1.03);
     box-shadow: 0 15px 40px rgba(208, 178, 0, 0.25);
     border-color: #d0b200;
 }
 
-.card-contianer:hover::before {
+.card-container:hover::before {
     left: 100%;
 }
 
@@ -345,7 +355,7 @@ body {
     border-radius: 4px;
     font-weight: 500;
 }
-    
+
 
 
 .image {
@@ -380,7 +390,7 @@ body {
     justify-content: center;
 }
 
-.card-contianer:hover .image {
+.card-container:hover .image {
     transform: scale(1.08);
 }
 
@@ -509,32 +519,11 @@ body {
 }
 
 @media (max-width: 768px) {
+
     .thumbnail-img,
     .video-player {
         max-width: 100%;
     }
-}
-
-.section {
-    background-color: white;
-}
-
-.heading {
-    font-family: Roboto;
-    font-size: 20px;
-    padding-top: 30px;
-    font-weight: 500;
-}
-
-.main-heading {
-    font-size: 35px;
-    font-family: bree-serief;
-    color: #190F0F;
-    font-weight: bold;
-}
-
-.explore-menu {
-    color: #EADD52;
 }
 
 .heading {
@@ -544,8 +533,15 @@ body {
     font-weight: 700;
 }
 
-.section {
-    background-color: #f9fbfe;
+.main-heading {
+    font-size: 35px;
+    font-family: "Roboto";
+    color: #190F0F;
+    font-weight: bold;
+}
+
+.explore-menu {
+    color: #EADD52;
 }
 
 .section {
@@ -563,7 +559,7 @@ body {
     margin-bottom: 20px;
 }
 
-.f-paragarph {
+.f-paragraph {
     color: #5a7184;
     font-family: "Roboto";
     font-size: 16px;
@@ -627,12 +623,12 @@ body {
         justify-content: center;
         gap: 10px;
     }
-    
+
     .payment-card-img {
         width: 65px;
         height: 65px;
     }
-    
+
     .payment-method-label {
         width: 100%;
         text-align: center;
@@ -649,17 +645,6 @@ body {
     border-width: 0;
     border-radius: 8px;
     margin-right: 10px;
-}
-
-.thanking-customers-section {
-    background-color: #d0b2001a;
-}
-
-.ak-heading {
-    color: #183b56;
-    font-family: "Roboto";
-    font-size: 28px;
-    font-weight: 700;
 }
 
 .thanking-customer-section {
@@ -942,6 +927,7 @@ body {
 }
 
 @media (max-width: 480px) {
+
     .btn,
     .btn-2 {
         font-size: 16px;

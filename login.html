@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Food Munch</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
     <link rel="stylesheet" href="food.css">
     <style>
         * {
@@ -71,9 +72,12 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px) translateX(0px);
             }
+
             50% {
                 transform: translateY(30px) translateX(20px);
             }
@@ -520,6 +524,7 @@
                 opacity: 0;
                 transform: translateY(50px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -531,6 +536,7 @@
                 opacity: 0;
                 transform: translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -538,33 +544,78 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         @keyframes shimmer {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
+            }
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @media (max-width: 768px) {
@@ -714,13 +765,7 @@
                     <label for="fullName" class="form-label">Full Name</label>
                     <div class="input-wrapper">
                         <span class="input-icon">👤</span>
-                        <input 
-                            type="text" 
-                            id="fullName" 
-                            class="form-control" 
-                            placeholder="Your Full Name"
-                            required
-                        >
+                        <input type="text" id="fullName" class="form-control" placeholder="Your Full Name" required>
                     </div>
                     <div class="error-message" id="nameError"></div>
                 </div>
@@ -730,13 +775,7 @@
                     <label for="email" class="form-label">Email Address</label>
                     <div class="input-wrapper">
                         <span class="input-icon">📧</span>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            class="form-control" 
-                            placeholder="your@email.com"
-                            required
-                        >
+                        <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
                     </div>
                     <div class="error-message" id="emailError"></div>
                 </div>
@@ -746,13 +785,8 @@
                     <label for="password" class="form-label">Password</label>
                     <div class="input-wrapper">
                         <span class="input-icon">🔐</span>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            class="form-control" 
-                            placeholder="Your Password (6+ chars)"
-                            required
-                        >
+                        <input type="password" id="password" class="form-control" placeholder="Your Password (6+ chars)"
+                            required>
                     </div>
                     <div class="error-message" id="passwordError"></div>
                 </div>
@@ -804,7 +838,7 @@
 
     <script>
         // Check if user is already logged in
-        window.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('DOMContentLoaded', function () {
             const user = localStorage.getItem('fm_user_profile');
             if (user) {
                 try {
@@ -813,7 +847,7 @@
                         // User already logged in, redirect to home
                         window.location.href = 'food.html';
                     }
-                } catch(e) {
+                } catch (e) {
                     // Invalid data, continue with login
                 }
             }
@@ -896,7 +930,7 @@
             btn.innerHTML = '<span class="loading-spinner"></span> <span>Signing in...</span>';
 
             // Simulate authentication delay
-            setTimeout(function() {
+            setTimeout(function () {
                 // Save user data to localStorage
                 const userProfile = {
                     name: fullName,
@@ -904,20 +938,20 @@
                     isLoggedIn: true,
                     loginDate: new Date().toISOString(),
                     rememberMe: rememberMe,
-                    photoDataUrl: localStorage.getItem('fm_user_profile') ? 
-                        JSON.parse(localStorage.getItem('fm_user_profile')).photoDataUrl : 
+                    photoDataUrl: localStorage.getItem('fm_user_profile') ?
+                        JSON.parse(localStorage.getItem('fm_user_profile')).photoDataUrl :
                         null,
-                    bio: localStorage.getItem('fm_user_profile') ? 
-                        JSON.parse(localStorage.getItem('fm_user_profile')).bio : 
+                    bio: localStorage.getItem('fm_user_profile') ?
+                        JSON.parse(localStorage.getItem('fm_user_profile')).bio :
                         'Food enthusiast 🍽️ Cooking & sharing delicious recipes',
-                    recipesCount: localStorage.getItem('fm_user_profile') ? 
+                    recipesCount: localStorage.getItem('fm_user_profile') ?
                         JSON.parse(localStorage.getItem('fm_user_profile')).recipesCount : 0,
-                    followers: localStorage.getItem('fm_user_profile') ? 
+                    followers: localStorage.getItem('fm_user_profile') ?
                         JSON.parse(localStorage.getItem('fm_user_profile')).followers : 0,
-                    following: localStorage.getItem('fm_user_profile') ? 
+                    following: localStorage.getItem('fm_user_profile') ?
                         JSON.parse(localStorage.getItem('fm_user_profile')).following : 0,
-                    memberSince: localStorage.getItem('fm_user_profile') ? 
-                        JSON.parse(localStorage.getItem('fm_user_profile')).memberSince : 
+                    memberSince: localStorage.getItem('fm_user_profile') ?
+                        JSON.parse(localStorage.getItem('fm_user_profile')).memberSince :
                         new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short' })
                 };
 
@@ -928,7 +962,7 @@
                 successMsg.style.display = 'block';
 
                 // Redirect to home after 1.5 seconds
-                setTimeout(function() {
+                setTimeout(function () {
                     window.location.href = 'food.html';
                 }, 1500);
             }, 1000);
@@ -947,19 +981,19 @@
         }
 
         // Real-time field validation
-        document.getElementById('fullName').addEventListener('blur', function() {
+        document.getElementById('fullName').addEventListener('blur', function () {
             if (this.value.trim()) {
                 clearError('name');
             }
         });
 
-        document.getElementById('email').addEventListener('blur', function() {
+        document.getElementById('email').addEventListener('blur', function () {
             if (this.value.trim() && isValidEmail(this.value.trim())) {
                 clearError('email');
             }
         });
 
-        document.getElementById('password').addEventListener('blur', function() {
+        document.getElementById('password').addEventListener('blur', function () {
             if (this.value.length >= 6) {
                 clearError('password');
             }
@@ -968,16 +1002,16 @@
         // Add smooth focus effects
         const inputs = document.querySelectorAll('.form-control');
         inputs.forEach(input => {
-            input.addEventListener('focus', function() {
+            input.addEventListener('focus', function () {
                 this.parentElement.style.transform = 'scale(1.02)';
             });
-            input.addEventListener('blur', function() {
+            input.addEventListener('blur', function () {
                 this.parentElement.style.transform = 'scale(1)';
             });
         });
 
         // Prevent form submission on enter for better UX
-        document.getElementById('loginForm').addEventListener('keydown', function(e) {
+        document.getElementById('loginForm').addEventListener('keydown', function (e) {
             if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
                 document.getElementById('loginBtn').click();
             }
