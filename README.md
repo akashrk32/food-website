@@ -24,7 +24,7 @@ A full-stack food web application that lets users browse a menu, share their own
 | Backend   | Python (Flask), Flask-CORS           |
 | Database  | MySQL                               |
 | Uploads   | Multipart form + local file storage |
-| Deploy    | Gunicorn + Procfile (Render/Heroku)  |
+| Deploy    | Gunicorn + Railway                  |
 
 ---
 
